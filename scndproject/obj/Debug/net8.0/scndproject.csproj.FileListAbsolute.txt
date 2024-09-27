@@ -1,0 +1,14 @@
+D:\C#\scndproject\scndproject\bin\Debug\net8.0\scndproject.exe
+D:\C#\scndproject\scndproject\bin\Debug\net8.0\scndproject.deps.json
+D:\C#\scndproject\scndproject\bin\Debug\net8.0\scndproject.runtimeconfig.json
+D:\C#\scndproject\scndproject\bin\Debug\net8.0\scndproject.dll
+D:\C#\scndproject\scndproject\bin\Debug\net8.0\scndproject.pdb
+D:\C#\scndproject\scndproject\obj\Debug\net8.0\scndproject.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\scndproject\scndproject\obj\Debug\net8.0\scndproject.AssemblyInfoInputs.cache
+D:\C#\scndproject\scndproject\obj\Debug\net8.0\scndproject.AssemblyInfo.cs
+D:\C#\scndproject\scndproject\obj\Debug\net8.0\scndproject.csproj.CoreCompileInputs.cache
+D:\C#\scndproject\scndproject\obj\Debug\net8.0\scndproject.dll
+D:\C#\scndproject\scndproject\obj\Debug\net8.0\refint\scndproject.dll
+D:\C#\scndproject\scndproject\obj\Debug\net8.0\scndproject.pdb
+D:\C#\scndproject\scndproject\obj\Debug\net8.0\scndproject.genruntimeconfig.cache
+D:\C#\scndproject\scndproject\obj\Debug\net8.0\ref\scndproject.dll
