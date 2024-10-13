@@ -7,6 +7,7 @@ partial class MyMatrix
     public int Height { get; }
     public int Width { get; }
 
+
     // constructors
     // copy 
     public MyMatrix(MyMatrix matrix) => matrixElems = (double[,])matrix.matrixElems.Clone();
@@ -17,31 +18,22 @@ partial class MyMatrix
     // jagged arr
     public MyMatrix(double[][] matrix)
     {
-        //TODO IsRectangular(double[][])
-        if (IsRectangular(matrix))
-        {
-            matrixElems = new double[matrix.Length, matrix[0].Length];
-            //TODO ConvertFromJaggedArrayToRectangular
-            matrixElems = ConvertFromJaggToRect(matrix);
-        }
-        else throw new Exception("Matrix must be rectangular");
+        IsRectangular(matrix);
+        matrixElems = new double[matrix.Length, matrix[0].Length];
+        matrixElems = ConvertFromJaggToRect(matrix);
     }
 
     // arr of strings
     public MyMatrix(string[] strings)
     {
-        //TODO IsRectangular(string[])
-        if (IsRectangular(strings))
-        {
-            matrixElems = new double[strings.Length, strings[0].Split(' ').Length];
-            //TODO ConvertFromStringArrayToMatrix()
-            matrixElems = ConvertFromStrArrToMatrix(strings);
-        }
-        else throw new Exception("Matrix must be rectangular");
+        IsRectangular(strings);
+        matrixElems = new double[strings.Length, strings[0].Split(' ').Length];
+        matrixElems = ConvertFromStrArrToMatrix(strings);
     }
 
     // string with separators ("\n" & "\t")
-    public MyMatrix(string str) : this(str.Replace("\t", " ").Split('\n')) { }
+    public MyMatrix(string str) : this(str.Replace("\t", " ").Split('\n', StringSplitOptions.RemoveEmptyEntries)) { }
+
 
     // getters, setters & indexers
     public int GetHeight() => Height;
@@ -49,23 +41,37 @@ partial class MyMatrix
 
     public double this[int i, int j]
     {
-        get { return matrixElems[i, j]; }
-        set { matrixElems[i, j] = value; }
+        get
+        {
+            AreValidIndexes(i, j);
+            return matrixElems[i, j];
+        }
+        set
+        {
+            AreValidIndexes(i, j);
+            matrixElems[i, j] = value;
+        }
     }
-
     public double GetMatrixElement(int row, int col)
     {
+        AreValidIndexes(row, col);
         return matrixElems[row, col];
     }
-
     public void SetMatrixElement(int row, int col, double value)
     {
+        AreValidIndexes(row, col);
         matrixElems[row, col] = value;
     }
+    public bool AreValidIndexes(int i, int j) => (i > matrixElems.GetLength(0) || j > matrixElems.GetLength(1)) ? throw new IndexOutOfRangeException($"Matrix has a size {Height}x{Width}") : true;
 
     // methods 
     private double[,] ConvertFromStrArrToMatrix(string[] strings)
     {
+        foreach (var str in strings)
+        {
+            if (str.Any(char.IsLetter)) throw new Exception("String must only contain numbers!");
+        }
+
         for (int i = 0; i < strings.Length; i++)
         {
             for (int j = 0; j < strings[i].Split(' ').Length; j++)
@@ -88,8 +94,8 @@ partial class MyMatrix
         return matrixElems;
     }
 
-    static bool IsRectangular(double[][] matrix) => !matrix.Any(x => x.Length != matrix[0].Length);
-    static bool IsRectangular(string[] strings) => !strings.Any(x => x.Length != strings[0].Length);
+    static bool IsRectangular(double[][] matrix) => !matrix.Any(x => x.Length != matrix[0].Length) ? true : throw new Exception("Matrix must be rectangular");
+    static bool IsRectangular(string[] strings) => !strings.Any(x => x.Length != strings[0].Length) ? true : throw new Exception("Matrix must be rectangular");
 
     override public string ToString()
     {
