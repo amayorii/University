@@ -1,0 +1,14 @@
+D:\C#\Laba2\Laba2\bin\Debug\net8.0\Laba2.exe
+D:\C#\Laba2\Laba2\bin\Debug\net8.0\Laba2.deps.json
+D:\C#\Laba2\Laba2\bin\Debug\net8.0\Laba2.runtimeconfig.json
+D:\C#\Laba2\Laba2\bin\Debug\net8.0\Laba2.dll
+D:\C#\Laba2\Laba2\bin\Debug\net8.0\Laba2.pdb
+D:\C#\Laba2\Laba2\obj\Debug\net8.0\Laba2.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\Laba2\Laba2\obj\Debug\net8.0\Laba2.AssemblyInfoInputs.cache
+D:\C#\Laba2\Laba2\obj\Debug\net8.0\Laba2.AssemblyInfo.cs
+D:\C#\Laba2\Laba2\obj\Debug\net8.0\Laba2.csproj.CoreCompileInputs.cache
+D:\C#\Laba2\Laba2\obj\Debug\net8.0\Laba2.dll
+D:\C#\Laba2\Laba2\obj\Debug\net8.0\refint\Laba2.dll
+D:\C#\Laba2\Laba2\obj\Debug\net8.0\Laba2.pdb
+D:\C#\Laba2\Laba2\obj\Debug\net8.0\Laba2.genruntimeconfig.cache
+D:\C#\Laba2\Laba2\obj\Debug\net8.0\ref\Laba2.dll
