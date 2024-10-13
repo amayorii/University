@@ -4,8 +4,10 @@ namespace Laba2;
 partial class MyMatrix
 {
     private readonly double[,] matrixElems;
-    // constructors
+    public int Height { get; }
+    public int Width { get; }
 
+    // constructors
     // copy 
     public MyMatrix(MyMatrix matrix) => matrixElems = (double[,])matrix.matrixElems.Clone();
 
@@ -40,6 +42,10 @@ partial class MyMatrix
 
     // string with separators ("\n" & "\t")
     public MyMatrix(string str) : this(str.Replace("\t", " ").Split('\n')) { }
+
+    // getters, setters & indexers
+    public int GetHeight() => Height;
+    public int GetWidth() => Width;
 
     // methods 
     private double[,] ConvertFromStrArrToMatrix(string[] strings)
