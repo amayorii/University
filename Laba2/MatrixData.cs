@@ -41,4 +41,47 @@ partial class MyMatrix
     // string with separators ("\n" & "\t")
     public MyMatrix(string str) : this(str.Replace("\t", " ").Split('\n')) { }
 
+    // methods 
+    private double[,] ConvertFromStrArrToMatrix(string[] strings)
+    {
+        for (int i = 0; i < strings.Length; i++)
+        {
+            for (int j = 0; j < strings[i].Split(' ').Length; j++)
+            {
+                matrixElems[i, j] = Convert.ToInt32(strings[i].Split(' ', StringSplitOptions.RemoveEmptyEntries)[j]);
+            }
+        }
+        return matrixElems;
+    }
+
+    private double[,] ConvertFromJaggToRect(double[][] matrix)
+    {
+        for (int i = 0; i < matrix.Length; i++)
+        {
+            for (int j = 0; j < matrix[i].Length; j++)
+            {
+                matrixElems[i, j] = matrix[i][j];
+            }
+        }
+        return matrixElems;
+    }
+
+    static bool IsRectangular(double[][] matrix) => !matrix.Any(x => x.Length != matrix[0].Length);
+    static bool IsRectangular(string[] strings) => !strings.Any(x => x.Length != strings[0].Length);
+
+    override public string ToString()
+    {
+        string str = null;
+
+        for (int i = 0; i < matrixElems.GetLength(0); i++)
+        {
+            for (int j = 0; j < matrixElems.GetLength(1); j++)
+            {
+                str += $"{matrixElems[i, j]}\t";
+            }
+
+            str += "\n";
+        }
+        return str;
+    }
 }
