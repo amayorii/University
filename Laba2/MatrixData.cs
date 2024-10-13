@@ -47,6 +47,22 @@ partial class MyMatrix
     public int GetHeight() => Height;
     public int GetWidth() => Width;
 
+    public double this[int i, int j]
+    {
+        get { return matrixElems[i, j]; }
+        set { matrixElems[i, j] = value; }
+    }
+
+    public double GetMatrixElement(int row, int col)
+    {
+        return matrixElems[row, col];
+    }
+
+    public void SetMatrixElement(int row, int col, double value)
+    {
+        matrixElems[row, col] = value;
+    }
+
     // methods 
     private double[,] ConvertFromStrArrToMatrix(string[] strings)
     {
