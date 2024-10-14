@@ -34,4 +34,20 @@ partial class MyMatrix
         }
         return matrix3;
     }
+
+    protected double[,] GetTransponedArray()
+    {
+        double[,] transponedArray = new double[Width, Height];
+        for (int i = 0; i < Width; i++)
+        {
+            for (int j = 0; j < Height; j++)
+            {
+                transponedArray[j, i] = matrixElems[i, j];
+            }
+        }
+        return transponedArray;
+    }
+    public MyMatrix GetTransponedCopy() => new(GetTransponedArray());
+    public void TransponeMe() => GetTransponedArray();
+
 }
