@@ -38,9 +38,9 @@ partial class MyMatrix
     protected double[,] GetTransponedArray()
     {
         double[,] transponedArray = new double[Width, Height];
-        for (int i = 0; i < Width; i++)
+        for (int i = 0; i < Height; i++)
         {
-            for (int j = 0; j < Height; j++)
+            for (int j = 0; j < Width; j++)
             {
                 transponedArray[j, i] = matrixElems[i, j];
             }
@@ -48,6 +48,6 @@ partial class MyMatrix
         return transponedArray;
     }
     public MyMatrix GetTransponedCopy() => new(GetTransponedArray());
-    public void TransponeMe() => GetTransponedArray();
+    public void TransponeMe() => matrixElems = GetTransponedArray();
 
 }

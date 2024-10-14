@@ -3,14 +3,14 @@ namespace Laba2;
 
 partial class MyMatrix
 {
-    private readonly double[,] matrixElems;
-    public int Height { get; }
-    public int Width { get; }
+    private double[,] matrixElems;
+    public int Height { get { return matrixElems.GetLength(0); } }
+    public int Width { get { return matrixElems.GetLength(1); } }
 
 
     // constructors
     // copy 
-    public MyMatrix(MyMatrix matrix) => matrixElems = (double[,])matrix.matrixElems.Clone();
+    public MyMatrix(MyMatrix matrix) : this(matrix.matrixElems) { }
 
     // 2-dim arr
     public MyMatrix(double[,] matrix) => matrixElems = (double[,])matrix.Clone();
@@ -74,9 +74,9 @@ partial class MyMatrix
 
         for (int i = 0; i < strings.Length; i++)
         {
-            for (int j = 0; j < strings[i].Split(' ').Length; j++)
+            for (int j = 0; j < strings[0].Split(' ').Length; j++)
             {
-                matrixElems[i, j] = Convert.ToInt32(strings[i].Split(' ', StringSplitOptions.RemoveEmptyEntries)[j]);
+                matrixElems[i, j] = Convert.ToDouble(strings[i].Split(' ', StringSplitOptions.RemoveEmptyEntries)[j]);
             }
         }
         return matrixElems;
@@ -99,11 +99,11 @@ partial class MyMatrix
 
     override public string ToString()
     {
-        string str = null;
+        string str = "";
 
-        for (int i = 0; i < matrixElems.GetLength(0); i++)
+        for (int i = 0; i < Height; i++)
         {
-            for (int j = 0; j < matrixElems.GetLength(1); j++)
+            for (int j = 0; j < Width; j++)
             {
                 str += $"{matrixElems[i, j]}\t";
             }
