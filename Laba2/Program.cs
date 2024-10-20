@@ -26,12 +26,14 @@ class Program
         // }
 
         // MyMatrix matrix2 = new MyMatrix(matrix1);
-        MyMatrix matrix = new MyMatrix("4\t5\t6\t7\n6\t6\t5\t4\n5\t6\t7\t8\n6\t5\t4\t2");
+        MyMatrix matrix = new MyMatrix("4\t5\t6\t7\n6\t65\t5\t4\n5\t6\t7\t8\n6\t5\t4\t2");
         // 4\t5\t6\t7\n
         // 6\t6\t5\t4\n
         // 5\t6\t7\t8\n
         // 6\t5\t4\t2
         Console.WriteLine(matrix);
+        matrix.TransponeMe();
+        System.Console.WriteLine(matrix);
         System.Console.WriteLine(matrix.GetTransponedCopy());
         // System.Console.WriteLine(matrix2);
         // matrix = new MyMatrix(matrix2); // 1 1 1 1

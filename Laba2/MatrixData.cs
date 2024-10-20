@@ -95,7 +95,7 @@ partial class MyMatrix
     }
 
     static bool IsRectangular(double[][] matrix) => !matrix.Any(x => x.Length != matrix[0].Length) ? true : throw new Exception("Matrix must be rectangular");
-    static bool IsRectangular(string[] strings) => !strings.Any(x => x.Length != strings[0].Length) ? true : throw new Exception("Matrix must be rectangular");
+    static bool IsRectangular(string[] strings) => !strings.Any(x => x.Split(' ').Length != strings[0].Split(' ').Length) ? true : throw new Exception("Matrix must be rectangular");
 
     override public string ToString()
     {

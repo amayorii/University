@@ -1,6 +1,6 @@
 namespace Laba2.UnitTests;
 
-public class UnitTest1
+public class MatrixDataTests
 {
     [Fact]
     public void Test1()

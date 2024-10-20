@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\C#\\Laba2\\Laba2\\Laba2.csproj",
+      "projectUniqueName": "D:\\C#\\University\\Laba2\\Laba2\\Laba2.csproj",
       "projectName": "Laba2",
-      "projectPath": "D:\\C#\\Laba2\\Laba2\\Laba2.csproj",
+      "projectPath": "D:\\C#\\University\\Laba2\\Laba2\\Laba2.csproj",
       "packagesPath": "C:\\Users\\alo\\.nuget\\packages\\",
-      "outputPath": "D:\\C#\\Laba2\\Laba2\\obj\\",
+      "outputPath": "D:\\C#\\University\\Laba2\\Laba2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\alo\\AppData\\Roaming\\NuGet\\NuGet.Config",
