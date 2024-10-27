@@ -106,10 +106,10 @@ public partial class MyMatrix
         {
             for (int j = 0; j < Width; j++)
                 str.Append($"{matrixElems[i, j]}\t");
-
+            str.Remove(str.Length - 1, 1);
             str.Append('\n');
         }
 
-        return str.ToString();
+        return str.Remove(str.Length - 1, 1).ToString();
     }
 }
