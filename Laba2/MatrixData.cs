@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 namespace Laba2;
 
 partial class MyMatrix
@@ -62,7 +63,7 @@ partial class MyMatrix
         AreValidIndexes(row, col);
         matrixElems[row, col] = value;
     }
-    public bool AreValidIndexes(int i, int j) => (i > matrixElems.GetLength(0) || j > matrixElems.GetLength(1)) ? throw new IndexOutOfRangeException($"Matrix has a size {Height}x{Width}") : true;
+    public bool AreValidIndexes(int i, int j) => (i > Height || i < 0 || j > Width || j < 0) ? throw new IndexOutOfRangeException($"Matrix has a size {Height}x{Width}") : true;
 
     // methods 
     private double[,] ConvertFromStrArrToMatrix(string[] strings)
@@ -99,17 +100,16 @@ partial class MyMatrix
 
     override public string ToString()
     {
-        string str = "";
+        StringBuilder str = new();
 
         for (int i = 0; i < Height; i++)
         {
             for (int j = 0; j < Width; j++)
-            {
-                str += $"{matrixElems[i, j]}\t";
-            }
+                str.Append($"{matrixElems[i, j]}\t");
 
-            str += "\n";
+            str.Append('\n');
         }
-        return str;
+
+        return str.ToString();
     }
 }
