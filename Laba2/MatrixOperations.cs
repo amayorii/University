@@ -2,7 +2,7 @@ using System;
 
 namespace Laba2;
 
-partial class MyMatrix
+public partial class MyMatrix
 {
     public static MyMatrix operator +(MyMatrix matrix1, MyMatrix matrix2)
     {

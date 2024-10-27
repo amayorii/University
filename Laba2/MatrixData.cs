@@ -2,7 +2,7 @@ using System;
 using System.Text;
 namespace Laba2;
 
-partial class MyMatrix
+public partial class MyMatrix
 {
     private double[,] matrixElems;
     public int Height { get { return matrixElems.GetLength(0); } }
@@ -63,7 +63,7 @@ partial class MyMatrix
         AreValidIndexes(row, col);
         matrixElems[row, col] = value;
     }
-    public bool AreValidIndexes(int i, int j) => (i > Height || i < 0 || j > Width || j < 0) ? throw new IndexOutOfRangeException($"Matrix has a size {Height}x{Width}") : true;
+    bool AreValidIndexes(int i, int j) => (i > Height || i < 0 || j > Width || j < 0) ? throw new IndexOutOfRangeException($"Matrix has a size {Height}x{Width}") : true;
 
     // methods 
     private double[,] ConvertFromStrArrToMatrix(string[] strings)
