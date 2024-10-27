@@ -80,7 +80,7 @@ public class MatrixDataTests
     [Fact]
     public void ToString_WrongMatrix_ShouldNotEqual()
     {
-        Assert.Equal("0\t1\t2\t3\n4\t5\t6\t7\n8\t9\t10\t11\n12\t13\t14\t15", new MyMatrix("4\t5\t6\t7\n6\t65\t5\t4\n12\t6\t7\t8\n6\t5\t4\t2").ToString());
+        Assert.NotEqual("0\t1\t2\t3\n4\t5\t6\t7\n8\t9\t10\t11\n12\t13\t14\t15", new MyMatrix("4\t5\t6\t7\n6\t65\t5\t4\n12\t6\t7\t8\n6\t5\t4\t2").ToString());
     }
 
     [Fact]
@@ -106,7 +106,7 @@ public class MatrixDataTests
     {
         MyMatrix mtx1 = new("4\t5\t6\t7\n6\t30\t-10\t4\n6\t6\t7\t8\n6\t5\t4\t2");
         MyMatrix mtx2 = new("4\t5\t6\t5\n3\t30\t5\t4\n6\t6\t7\t8\n6\t5\t4\t2");
-        MyMatrix mtx3 = new("16\t25\t36\t45\n18\t900\t-50\t24\n36\t36\t49\t64\n36\t25\t16\t4");
+        MyMatrix mtx3 = new("109\t241\t119\t102\n78\t890\t132\t78\n132\t292\t147\t126\n75\t214\t97\t86");
         Assert.Equal(mtx3.ToString(), (mtx1 * mtx2).ToString());
     }
 
