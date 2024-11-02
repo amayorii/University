@@ -6,6 +6,8 @@ class Program
 {
     static void Main()
     {
+        string[] files = Directory.GetFiles("./InvalidData/");
+        foreach (var item in files) File.Delete(item);
         System.Console.WriteLine(AvgSum());
     }
     static double AvgSum()
@@ -34,21 +36,25 @@ class Program
             catch (OverflowException)
             {
                 System.Console.WriteLine($"Exception {number}\nReason: numbers are too big and their product cannot exceed {int.MaxValue}\nFile name: {Path.GetFileName(path)}\n");
+                AppendLog("overflow", path);
                 number++;
             }
             catch (ArgumentNullException)
             {
                 System.Console.WriteLine($"Exception {number}\nReason: file must contain only 1 integer in first and 1 integer in second lines\nFile name: {Path.GetFileName(path)}\n");
+                AppendLog("bad_data", path);
                 number++;
             }
             catch (FormatException ex)
             {
                 System.Console.WriteLine($"Exception {number}\nReason: {ex.Message.ToLower()}\nFile name: {Path.GetFileName(path)}\n");
+                AppendLog("bad_data", path);
                 number++;
             }
             catch (FileNotFoundException)
             {
                 System.Console.WriteLine($"Exception {number}\nReason: file wasn't found\nFile name: {Path.GetFileName(path)}\n");
+                AppendLog("no_file", path);
                 number++;
             }
             catch (Exception ex)
@@ -57,5 +63,20 @@ class Program
             }
         }
         return avg / count;
+    }
+    static void AppendLog(string name, string path)
+    {
+        try
+        {
+            FileStream creator = new FileStream($"./InvalidData/{name}.txt", FileMode.Append);
+            StreamWriter streamWriter = new StreamWriter(creator);
+            streamWriter.WriteLine(Path.GetFileName(path));
+            streamWriter.Close();
+            creator.Close();
+        }
+        catch (Exception)
+        {
+            System.Console.WriteLine($"Couldn't create or update {name}.txt file");
+        }
     }
 }
