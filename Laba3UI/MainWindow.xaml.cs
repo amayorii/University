@@ -9,6 +9,7 @@ namespace Laba3UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        readonly static string src = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent!.Parent!.Parent!.FullName;
         public MainWindow()
         {
             InitializeComponent();
@@ -16,10 +17,10 @@ namespace Laba3UI
         }
         static void Run()
         {
-            string[] files = Directory.GetFiles("./InvalidData/");
+            string[] files = Directory.GetFiles($@"{src}\InvalidData\");
             foreach (var item in files) File.Delete(item);
             Console.WriteLine(AvgSum());
-            MirroredGifs("./images/");
+            MirroredGifs(@$"{src}\images\");
         }
         static double AvgSum()
         {
@@ -28,7 +29,7 @@ namespace Laba3UI
             byte number = 1;
             for (int i = 10; i < 30; i++)
             {
-                string path = $"./txts/{i}.txt";
+                string path = $@"{src}\txts\{i}.txt";
                 try
                 {
                     var file = new FileStream(path, FileMode.Open);
@@ -79,7 +80,7 @@ namespace Laba3UI
         {
             try
             {
-                FileStream creator = new FileStream($"./InvalidData/{name}.txt", FileMode.Append);
+                FileStream creator = new FileStream($@"{src}\InvalidData\{name}.txt", FileMode.Append);
                 StreamWriter streamWriter = new StreamWriter(creator);
                 streamWriter.WriteLine(Path.GetFileName(path));
                 streamWriter.Close();
@@ -100,10 +101,9 @@ namespace Laba3UI
                 {
                     try
                     {
-                        // TODO ON WPF AND CORRECT COPY
                         Bitmap img = new(image);
                         img.RotateFlip(RotateFlipType.Rotate180FlipX);
-                        img.Save($"./MirroredGifs/{Path.GetFileNameWithoutExtension(image)}-mirrored.gif");
+                        img.Save($@"{src}\MirroredGifs\{Path.GetFileNameWithoutExtension(image)}-mirrored.gif");
                     }
                     catch (Exception ex)
                     {

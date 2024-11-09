@@ -5,23 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laba3UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1500">
+        Title="MainWindow" Height="700" Width="1200">
     <Window.Resources>
-        <Style TargetType="{x:Type Button}">
-           
+        <!--shadow-->
+        <DropShadowEffect x:Key="dropShadow" BlurRadius="20" Direction="315" />
+        <!--btn base props-->
+        <Style TargetType="Button" x:Key="baseBtn">
+            <Setter Property="FontSize" Value="30"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="Height" Value="60"></Setter>
+            <Setter Property="Effect" Value="{StaticResource dropShadow}"></Setter>
         </Style>
+
     </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="190"></RowDefinition>
+            <RowDefinition Height="143.04"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Name="selectFileBtn" Content="Select files" FontSize="40"
-                Width="250" Height="80" Margin="885,55,365,55" Grid.Row="1"/>
+        <Button Name="selectFileBtn" Content="Select files"
+                Margin="698,0,0,0" Grid.Row="1" HorizontalAlignment="Left" Height="60" Width="200"/>
 
-        <Button Name="mirrorFilesBtn" Content="Mirror" FontSize="40"
-                Width="250" Height="80" Margin="1212,55,38,55" Grid.Row="1"/>
-        
-        
+        <Button Name="mirrorFilesBtn" Content="Mirror"
+                Margin="954,0,0,0" Grid.Row="1" HorizontalAlignment="Left" Height="60" Width="200"/>
+
+
     </Grid>
 </Window>
