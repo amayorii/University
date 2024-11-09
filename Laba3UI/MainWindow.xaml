@@ -7,30 +7,86 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1200">
     <Window.Resources>
-        <!--shadow-->
-        <DropShadowEffect x:Key="dropShadow" BlurRadius="20" Direction="315" />
+        <!--shadows-->
+        <DropShadowEffect x:Key="shadowFileBtn" Direction="315" ShadowDepth="1" BlurRadius="10" Opacity="0.5" Color="MediumPurple"/>
+        <DropShadowEffect x:Key="shadowMirrorBtn" Direction="315" ShadowDepth="1" BlurRadius="10" Opacity="0.5" Color="#7199E8"/>
         <!--btn base props-->
         <Style TargetType="Button" x:Key="baseBtn">
-            <Setter Property="FontSize" Value="30"></Setter>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="25"></Setter>
+            <Setter Property="FontFamily" Value="JetBrains Mono"/>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="Width" Value="200"></Setter>
             <Setter Property="Height" Value="60"></Setter>
-            <Setter Property="Effect" Value="{StaticResource dropShadow}"></Setter>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
 
+        <!--selectFileBtn-->
+        <Style TargetType="{x:Type Button}" x:Key="fileBtn" 
+               BasedOn="{StaticResource baseBtn}">
+            <Setter Property="Background" Value="#D3C5E5"/>
+            <Setter Property="Effect" Value="{StaticResource shadowFileBtn}"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#BDA1D9"/>
+                </Trigger>
+            </Style.Triggers>
+            
+        </Style>
+        
+        <!--mirrorBtn-->
+        <Style TargetType="{x:Type Button}" x:Key="mirrorBtn" 
+               BasedOn="{StaticResource baseBtn}">
+            <Setter Property="Background" Value="#ADD8E6"/>
+            <Setter Property="Effect" Value="{StaticResource shadowMirrorBtn}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#7CB9E8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="143.04"></RowDefinition>
+            <RowDefinition/>
+            <RowDefinition Height="143.04"/>
         </Grid.RowDefinitions>
-        <Button Name="selectFileBtn" Content="Select files"
-                Margin="698,0,0,0" Grid.Row="1" HorizontalAlignment="Left" Height="60" Width="200"/>
 
+        <Button Name="selectFileBtn" Content="Select files"
+                Style="{StaticResource fileBtn}"
+                Margin="698,0,0,0" Grid.Row="1" 
+                HorizontalAlignment="Left" Height="60" Width="200"/>
+        
         <Button Name="mirrorFilesBtn" Content="Mirror"
-                Margin="954,0,0,0" Grid.Row="1" HorizontalAlignment="Left" Height="60" Width="200"/>
+                Style="{StaticResource mirrorBtn}"
+                Margin="954,0,0,0" Grid.Row="1"
+                HorizontalAlignment="Left" Height="60" Width="200"/>
 
 
     </Grid>
