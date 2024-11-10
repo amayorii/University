@@ -1,5 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Xml;
+using System.Drawing;
+using System.Text.RegularExpressions;
+using System.Drawing.Imaging;
+#pragma warning disable CA1416 // Validate platform compatibility
 namespace Laba3;
 
 class Program
@@ -9,6 +13,7 @@ class Program
         string[] files = Directory.GetFiles("./InvalidData/");
         foreach (var item in files) File.Delete(item);
         System.Console.WriteLine(AvgSum());
+        MirroredGifs("./images/");
     }
     static double AvgSum()
     {
@@ -22,8 +27,8 @@ class Program
             {
                 var file = new FileStream(path, FileMode.Open);
                 StreamReader reader = new StreamReader(file);
-                int num1 = Convert.ToInt32(reader.ReadLine() ?? throw new ArgumentNullException());
-                int num2 = Convert.ToInt32(reader.ReadLine() ?? throw new ArgumentNullException());
+                int num1 = int.Parse(reader.ReadLine()!);
+                int num2 = int.Parse(reader.ReadLine()!);
                 file.Close();
                 reader.Close();
                 checked
@@ -35,7 +40,7 @@ class Program
             }
             catch (OverflowException)
             {
-                System.Console.WriteLine($"Exception {number}\nReason: numbers are too big and their product cannot exceed {int.MaxValue}\nFile name: {Path.GetFileName(path)}\n");
+                System.Console.WriteLine($"Exception {number}\nReason: numbers are too big and their product cannot exceed {int.MaxValue}/{-int.MaxValue}\nFile name: {Path.GetFileName(path)}\n");
                 AppendLog("overflow", path);
                 number++;
             }
@@ -77,6 +82,29 @@ class Program
         catch (Exception)
         {
             System.Console.WriteLine($"Couldn't create or update {name}.txt file");
+        }
+    }
+    static void MirroredGifs(string path)
+    {
+        var images = Directory.GetFiles(path);
+        Regex regexExtForImage = new("^((.bmp)|(.gif)|(.tiff?)|(.jpe?g)|(.png)|(.ico)|(.svg)|(.pdf)|(.avif)|(.webp))$", RegexOptions.IgnoreCase);
+        foreach (var image in images)
+        {
+            if (regexExtForImage.IsMatch(Path.GetExtension(image)))
+            {
+                try
+                {
+                    // TODO ON WPF AND CORRECT GIF COPY
+                    Bitmap img = new(image);
+                    img.RotateFlip(RotateFlipType.Rotate180FlipX);
+                    img.Save($"./MirroredGifs/{Path.GetFileNameWithoutExtension(image)}-mirrored.gif");
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.Message);
+                    System.Console.WriteLine("error in " + Path.GetFileNameWithoutExtension(image));
+                }
+            }
         }
     }
 }
