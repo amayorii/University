@@ -5,6 +5,15 @@ public class MatrixDataTests
     MyMatrix mtx = new(new double[5, 4]);
 
     [Fact]
+    public void TransponeMe_SetValueToCopiedMatrix_ShouldNotEqual()
+    {
+        MyMatrix mtx = new MyMatrix("4\t5\t6\t7\n6\t65\t5\t4\n5\t6\t7\t8\n6\t5\t4\t2");
+        MyMatrix mtx1 = new MyMatrix(mtx);
+        mtx1.TransponeMe();
+        mtx1[2, 3] = -5555;
+        Assert.NotEqual(mtx.ToString(), mtx1.ToString());
+    }
+    [Fact]
     public void StringCtors_NotRectangular_ThrowsExc()
     {
         Assert.ThrowsAny<Exception>(() => new MyMatrix(""));
