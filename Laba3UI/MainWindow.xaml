@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laba3UI"
         mc:Ignorable="d"
-        Title="ImageReflector" Height="700" Width="1200" WindowStartupLocation="CenterScreen">
+        Title="ImageReflector" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <!--shadows-->
         <DropShadowEffect x:Key="shadowFileBtn" Direction="315" ShadowDepth="1" BlurRadius="10" Opacity="0.5" Color="MediumPurple"/>
@@ -21,6 +22,17 @@
             <Setter Property="Height" Value="60"></Setter>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <!--selectFileBtn-->
@@ -29,17 +41,6 @@
             <Setter Property="Background" Value="#D3C5E5"/>
             <Setter Property="Effect" Value="{StaticResource shadowFileBtn}"/>
 
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#BDA1D9"/>
@@ -53,22 +54,13 @@
                BasedOn="{StaticResource baseBtn}">
             <Setter Property="Background" Value="#ADD8E6"/>
             <Setter Property="Effect" Value="{StaticResource shadowMirrorBtn}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter 
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#7CB9E8"/>
                 </Trigger>
             </Style.Triggers>
+            
         </Style>
     </Window.Resources>
 
@@ -89,8 +81,7 @@
                     <UniformGrid Columns="3"
                                  Height="Auto"
                                  Width="Auto"
-                                 RenderTransformOrigin="0.472,0.496"
-                                 Selector.Selected="mirrorFilesBtn_Click"></UniformGrid>
+                                 RenderTransformOrigin="0.472,0.496"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
@@ -112,8 +103,7 @@
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="3"
                                  Height="Auto"
-                                 Width="Auto" RenderTransformOrigin="0.472,0.496"
-                                 />
+                                 Width="Auto" RenderTransformOrigin="0.472,0.496"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>

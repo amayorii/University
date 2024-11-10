@@ -9,11 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="InvalidData\**" />
+    <EmbeddedResource Remove="InvalidData\**" />
+    <None Remove="InvalidData\**" />
+    <Page Remove="InvalidData\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="8.0.10" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="InvalidData\" />
     <Folder Include="MirroredGifs\" />
   </ItemGroup>
 
