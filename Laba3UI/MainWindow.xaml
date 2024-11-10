@@ -82,12 +82,15 @@
         <ListView x:Name="PictureList" Background="{x:Null}"
                   HorizontalContentAlignment="Stretch"
                   VerticalContentAlignment="Stretch"
+                  MouseDoubleClick="PictureList_MouseDoubleClick"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,600,0">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" Rows="6"
+                    <UniformGrid Columns="3"
                                  Height="Auto"
-                                 Width="1198" RenderTransformOrigin="0.472,0.496"/>
+                                 Width="Auto"
+                                 RenderTransformOrigin="0.472,0.496"
+                                 Selector.Selected="mirrorFilesBtn_Click"></UniformGrid>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
@@ -101,14 +104,16 @@
 
         <!--reflected images-->
         <ListView x:Name="ReflectedList" Background="{x:Null}"
-          HorizontalContentAlignment="Stretch"
-          VerticalContentAlignment="Stretch"
-          ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="600,0,0,0">
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    MouseDoubleClick="ReflectedList_MouseDoubleClick"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="600,0,0,0">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" Rows="6"
-                         Height="Auto"
-                         Width="1198" RenderTransformOrigin="0.472,0.496"/>
+                    <UniformGrid Columns="3"
+                                 Height="Auto"
+                                 Width="Auto" RenderTransformOrigin="0.472,0.496"
+                                 />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>

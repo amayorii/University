@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -125,7 +126,7 @@ namespace Laba3UI
             {
                 foreach (var image in fd.FileNames)
                 {
-                    this.PictureList.Items.Add(image);
+                    if (!this.PictureList.Items.Contains(image)) this.PictureList.Items.Add(image);
                 }
             }
             else
@@ -137,6 +138,21 @@ namespace Laba3UI
         private void mirrorFilesBtn_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void ReflectedList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process photoViewer = new Process();
+            photoViewer.StartInfo.FileName = "explorer.exe";
+            photoViewer.StartInfo.Arguments = ReflectedList.SelectedItem.ToString();
+            photoViewer.Start();
+        }
+
+        private void PictureList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process photoViewer = new Process();
+            photoViewer.StartInfo.FileName = "explorer.exe";
+            photoViewer.StartInfo.Arguments = PictureList.SelectedItem.ToString();
+            photoViewer.Start();
         }
     }
 }
