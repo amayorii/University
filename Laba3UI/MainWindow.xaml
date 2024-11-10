@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laba3UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1200">
+        Title="ImageReflector" Height="700" Width="1200" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <!--shadows-->
         <DropShadowEffect x:Key="shadowFileBtn" Direction="315" ShadowDepth="1" BlurRadius="10" Opacity="0.5" Color="MediumPurple"/>
@@ -45,9 +45,9 @@
                     <Setter Property="Background" Value="#BDA1D9"/>
                 </Trigger>
             </Style.Triggers>
-            
+
         </Style>
-        
+
         <!--mirrorBtn-->
         <Style TargetType="{x:Type Button}" x:Key="mirrorBtn" 
                BasedOn="{StaticResource baseBtn}">
@@ -77,13 +77,55 @@
             <RowDefinition/>
             <RowDefinition Height="143.04"/>
         </Grid.RowDefinitions>
+        
+        <!--source images-->
+        <ListView x:Name="PictureList" Background="{x:Null}"
+                  HorizontalContentAlignment="Stretch"
+                  VerticalContentAlignment="Stretch"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,600,0">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3" Rows="6"
+                                 Height="Auto"
+                                 Width="1198" RenderTransformOrigin="0.472,0.496"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="{Binding}" Stretch="UniformToFill"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!--reflected images-->
+        <ListView x:Name="ReflectedList" Background="{x:Null}"
+          HorizontalContentAlignment="Stretch"
+          VerticalContentAlignment="Stretch"
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="600,0,0,0">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3" Rows="6"
+                         Height="Auto"
+                         Width="1198" RenderTransformOrigin="0.472,0.496"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="{Binding}" Stretch="UniformToFill"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <Button Name="selectFileBtn" Content="Select files"
                 Style="{StaticResource fileBtn}"
                 Margin="698,0,0,0" Grid.Row="1" 
-                HorizontalAlignment="Left" Height="60" Width="200"/>
-        
-        <Button Name="mirrorFilesBtn" Content="Mirror"
+                HorizontalAlignment="Left" Height="60" Width="200" Click="selectFileBtn_Click"/>
+
+        <Button Name="mirrorFilesBtn" Content="Mirror" Click="mirrorFilesBtn_Click"
                 Style="{StaticResource mirrorBtn}"
                 Margin="954,0,0,0" Grid.Row="1"
                 HorizontalAlignment="Left" Height="60" Width="200"/>

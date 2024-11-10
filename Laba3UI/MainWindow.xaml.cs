@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using Microsoft.Win32;
+using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -13,14 +14,14 @@ namespace Laba3UI
         public MainWindow()
         {
             InitializeComponent();
-            Run();
+            //MessageBox.Show(AvgSum().ToString());
+            ClearFiles();
         }
-        static void Run()
+        static void ClearFiles()
         {
             string[] files = Directory.GetFiles($@"{src}\InvalidData\");
             foreach (var item in files) File.Delete(item);
-            Console.WriteLine(AvgSum());
-            MirroredGifs(@$"{src}\images\");
+            files = Directory.GetFiles($@"{src}\MirroredGifs\");
         }
         static double AvgSum()
         {
@@ -112,6 +113,30 @@ namespace Laba3UI
                     }
                 }
             }
+        }
+
+        private void selectFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Multiselect = true;
+            fd.InitialDirectory = @$"{src}\images\";
+            fd.Filter = "Image Files | *.jpg; *.jpeg; *.png; *.tiff; *.tif; *.svg; *.bmp; *.gif; *.ico; *.avif";
+            if (fd.ShowDialog() == true)
+            {
+                foreach (var image in fd.FileNames)
+                {
+                    this.PictureList.Items.Add(image);
+                }
+            }
+            else
+            {
+                MessageBox.Show("File wasn't selected");
+            }
+        }
+
+        private void mirrorFilesBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

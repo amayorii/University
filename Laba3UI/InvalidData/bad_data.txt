@@ -1,6 +1,0 @@
-12.txt
-16.txt
-17.txt
-22.txt
-24.txt
-27.txt
