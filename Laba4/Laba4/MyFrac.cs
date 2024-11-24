@@ -1,7 +1,7 @@
 using System.Numerics;
 using System.Reflection.Metadata;
-
-class MyFrac : IMyNumber<MyFrac>
+#pragma warning disable CS8767
+class MyFrac : IMyNumber<MyFrac>, IComparable<MyFrac>
 {
     readonly BigInteger numerator;
     readonly BigInteger denominator;
@@ -49,6 +49,11 @@ class MyFrac : IMyNumber<MyFrac>
     private static void CheckForZero(object denominator)
     {
         if (denominator.ToString() == "0") throw new DivideByZeroException("denominator cannot be 0");
+    }
+
+    public int CompareTo(MyFrac other)
+    {
+        return (int)(numerator * other.denominator - other.numerator * denominator);
     }
 
     public MyFrac Add(MyFrac another)
