@@ -73,6 +73,6 @@ class MyFrac : IMyNumber<MyFrac>
 
     public override string ToString()
     {
-        return $"";
+        return $"{numerator}/{denominator}";
     }
 }
