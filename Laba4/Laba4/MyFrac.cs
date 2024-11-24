@@ -1,7 +1,7 @@
 using System.Numerics;
 using System.Reflection.Metadata;
 #pragma warning disable CS8767
-class MyFrac : IMyNumber<MyFrac>, IComparable<MyFrac>
+public class MyFrac : IMyNumber<MyFrac>, IComparable<MyFrac>
 {
     readonly BigInteger numerator;
     readonly BigInteger denominator;

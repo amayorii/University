@@ -1,4 +1,4 @@
-class MyComplex : IMyNumber<MyComplex>
+public class MyComplex : IMyNumber<MyComplex>
 {
     readonly double real, imaginary;
 
@@ -26,8 +26,8 @@ class MyComplex : IMyNumber<MyComplex>
 
     public MyComplex Multiply(MyComplex another)
     {
-        return new MyComplex((real * another.real) - (imaginary * another.imaginary),
-                             (real * another.imaginary) + (imaginary * another.real));
+        return new MyComplex(real * another.real - imaginary * another.imaginary,
+                             real * another.imaginary + imaginary * another.real);
     }
 
     public MyComplex Divide(MyComplex another)
@@ -35,8 +35,8 @@ class MyComplex : IMyNumber<MyComplex>
         double denom = Math.Pow(another.real, 2) + Math.Pow(another.imaginary, 2);
 
         return new MyComplex(
-            ((real * another.real) + (imaginary * another.imaginary)) / denom,
-            ((imaginary * another.real) - (real * another.imaginary)) / denom
+            (real * another.real + imaginary * another.imaginary) / denom,
+            (imaginary * another.real - real * another.imaginary) / denom
         );
     }
 
