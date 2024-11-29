@@ -3,17 +3,50 @@ public class DrinkMachine : IMachineAction
 {
     public void GetCoffee()
     {
-        throw new NotImplementedException();
+        try
+        {
+            TakePayment(10, 5);
+        }
+        catch (NoMoneyException ex)
+        {
+            System.Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            System.Console.WriteLine("Have an awesome day!");
+        }
     }
 
     public void GetJuice()
     {
-        throw new NotImplementedException();
+        try
+        {
+            TakePayment(15, 7);
+        }
+        catch (NoMoneyException ex)
+        {
+            System.Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            System.Console.WriteLine("Have a juicy day!");
+        }
     }
 
     public void GetTea()
     {
-        throw new NotImplementedException();
+        try
+        {
+            TakePayment(5, 3);
+        }
+        catch (NoMoneyException ex)
+        {
+            System.Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            System.Console.WriteLine("Have a sweet day!");
+        }
     }
 
     public void TakePayment(int costMoney, int costPoints)
