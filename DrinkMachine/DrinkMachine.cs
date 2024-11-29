@@ -52,9 +52,13 @@ public class DrinkMachine : IMachineAction
     public void TakePayment(int costMoney, int costPoints)
     {
         string pathMoney = "./Payment/money.txt", pathBonus = "./Payment/bonus.txt";
+        var moneyReader = new StreamReader(pathMoney);
+        int money = Convert.ToInt32(moneyReader.ReadLine());
+        moneyReader.Close();
 
-        int money = Convert.ToInt32(new StreamReader(pathMoney).ReadLine());
-        int points = Convert.ToInt32(new StreamReader(pathBonus).ReadLine());
+        var bonusReader = new StreamReader(pathBonus);
+        int points = Convert.ToInt32(bonusReader.ReadLine());
+        bonusReader.Close();
 
         if (money < costMoney && points < costPoints) throw new NoMoneyException("You don't have money 😔");
 
