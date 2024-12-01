@@ -5,7 +5,7 @@ internal class Figure
     protected int centerX;
     protected int centerY;
     protected Color color;
-    protected Graphics g = new Form1().CreateGraphics();
+    protected Graphics g = Form.ActiveForm!.CreateGraphics();
     public Figure(int centerX, int centerY, Color color)
     {
         this.centerX = centerX;
