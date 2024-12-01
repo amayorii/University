@@ -8,7 +8,7 @@ internal class Square : Figure
         this.SideLength = sideLength;
     }
     public int SideLength { get => sideLength; set => sideLength = value; }
-    protected override Point[] GetPoints()
+    protected Point[] GetPoints()
     {
         return [
             new Point(centerX - sideLength, centerY - sideLength),

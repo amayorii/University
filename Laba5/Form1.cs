@@ -21,7 +21,8 @@ namespace Laba5
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            Rhomb rhomb = new Rhomb(100, 250, Color.LawnGreen, 100, 50);
+            rhomb.MoveRightOn(200);
         }
     }
 }

@@ -12,7 +12,6 @@ internal class Figure
         this.centerY = centerY;
         this.color = color;
     }
-    protected virtual Point[] GetPoints() => [];
     public virtual void DrawFigure() { }
     public virtual void HideFigure() { }
     public void MoveRightOn(int pixels)
