@@ -9,13 +9,14 @@ namespace Laba5
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Square square = new Square(100, 100, Color.Black, 50);
+            Square square = new Square(100, 75, Color.Black, 50);
             square.MoveRightOn(200);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Ellipse ellipse = new Ellipse(100, 150, Color.RebeccaPurple, 100);
+            ellipse.MoveRightOn(200);
         }
 
         private void button3_Click(object sender, EventArgs e)
