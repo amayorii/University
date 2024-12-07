@@ -7,21 +7,29 @@ class Program
     static void Main()
     {
         DrinkMachine dm = new();
-        System.Console.WriteLine(FiggleFonts.Standard.Render("|  Choose a drink  |"));
-        System.Console.WriteLine(FiggleFonts.Standard.Render("   Coffee Tea Juice"));
+        System.Console.Write(FiggleFonts.Standard.Render("____________________\n"));
+        System.Console.Write(FiggleFonts.Standard.Render("|      >  >  >  Choose a drink  <  <  <      |\n"));
+        System.Console.Write(FiggleFonts.Standard.Render("|                                                                                                                    |\n"));
+        System.Console.Write(FiggleFonts.Standard.Render("|    < Coffee >    < Tea >    < Juice >    |\n"));
+        System.Console.Write(FiggleFonts.Standard.Render("|                                                                                                                    |\n"));
+        System.Console.Write(FiggleFonts.Standard.Render("|                                                                                                                    |\n"));
+        System.Console.Write(FiggleFonts.Standard.Render("|         [                               ]                                                                    |\n"));
+        System.Console.WriteLine(FiggleFonts.Standard.Render(" ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"));
+        System.Console.WriteLine();
+
         switch (Console.ReadLine()!.ToLower())
         {
             case "coffee":
-                dm.GetCoffee();
+                dm.Get(new Coffee());
                 return;
             case "tea":
-                dm.GetTea();
+                dm.Get(new Tea());
                 return;
             case "juice":
-                dm.GetJuice();
+                dm.Get(new Juice());
                 return;
             default:
-                System.Console.WriteLine("Something went wrong!");
+                System.Console.WriteLine("This drink isn't available yet");
                 return;
         }
     }
