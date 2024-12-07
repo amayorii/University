@@ -1,64 +1,36 @@
 namespace DrinkMachine;
 public class DrinkMachine : IMachineAction
 {
-    public void GetCoffee()
+    public void Get(IDrink drink)
     {
         try
         {
-            TakePayment(10, 5);
+            TakePayment(drink.CostMoney, drink.CostPoints, drink.GivePoints);
         }
-        catch (NoMoneyException ex)
+        catch (NoMoneyException)
+        {
+            System.Console.WriteLine("You don't have money 😔");
+        }
+        catch (Exception ex)
         {
             System.Console.WriteLine(ex.Message);
         }
         finally
         {
-            System.Console.WriteLine("Have an awesome day!");
+            System.Console.WriteLine("Have a nice day!");
         }
     }
 
-    public void GetJuice()
-    {
-        try
-        {
-            TakePayment(15, 7);
-        }
-        catch (NoMoneyException ex)
-        {
-            System.Console.WriteLine(ex.Message);
-        }
-        finally
-        {
-            System.Console.WriteLine("Have a juicy day!");
-        }
-    }
-
-    public void GetTea()
-    {
-        try
-        {
-            TakePayment(5, 3);
-        }
-        catch (NoMoneyException ex)
-        {
-            System.Console.WriteLine(ex.Message);
-        }
-        finally
-        {
-            System.Console.WriteLine("Have a sweet day!");
-        }
-    }
-
-    public void TakePayment(int costMoney, int costPoints)
+    public void TakePayment(int costMoney, int costPoints, int givePoints)
     {
         string pathMoney = "./Payment/money.txt", pathBonus = "./Payment/bonus.txt";
-        var moneyReader = new StreamReader(pathMoney);
-        int money = Convert.ToInt32(moneyReader.ReadLine());
-        moneyReader.Close();
+        int money, points;
 
-        var bonusReader = new StreamReader(pathBonus);
-        int points = Convert.ToInt32(bonusReader.ReadLine());
-        bonusReader.Close();
+        using (var moneyReader = new StreamReader(pathMoney))
+            money = Convert.ToInt32(moneyReader.ReadLine());
+
+        using (var bonusReader = new StreamReader(pathBonus))
+            points = Convert.ToInt32(bonusReader.ReadLine());
 
         if (money < costMoney && points < costPoints) throw new NoMoneyException("You don't have money 😔");
 
@@ -73,7 +45,7 @@ public class DrinkMachine : IMachineAction
             }
         }
         File.WriteAllText(pathMoney, (money -= costMoney).ToString());
-        File.WriteAllText(pathBonus, (++points).ToString());
-        System.Console.WriteLine($"You spent ${costMoney} and gain 1 point\nNow your balance is: ${money} | {points} pts");
+        File.WriteAllText(pathBonus, (points += givePoints).ToString());
+        System.Console.WriteLine($"You spent ${costMoney} and gain {givePoints} points\nNow your balance is: ${money} | {points} pts");
     }
 }
