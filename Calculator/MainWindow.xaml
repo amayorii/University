@@ -25,16 +25,18 @@
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Margin" Value="5,5,5,5"/>
-            <Setter Property="BorderBrush" Value="PaleVioletRed"/>
-            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="BorderBrush" Value="BlueViolet"/>
+            <Setter Property="Background" Value="Lavender"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Style.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Style.Resources>
         </Style>
-        
     </Window.Resources>
+    
     <Grid x:Name="grid" ShowGridLines="True">
         <!--#region Row & Column defs-->
         <Grid.RowDefinitions>
