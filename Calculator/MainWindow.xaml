@@ -5,8 +5,149 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="520" Width="360">
+        Title="MainWindow" Height="520" Width="360"
+        Background="GhostWhite">
+    
+    <!-- 
+    Do GUI:
+    buttons - stopped | maybe some upgrade?
+    _______________________
+    |CE | C | <-| Divide   |
+    | 1 | 2 | 3 | multiply |
+    | 4 | 5 | 6 | minus    |
+    | 7 | 8 | 9 | plus     |
+    |00 | 0 | . | =        |
+    ————————————————————————
+    display - stopped | maybe upgrade
+    left upper button - stopped | maybe upgrade
+    -->
+    
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="BorderBrush" Value="#B57EDC"/>
+            <Setter Property="Background" Value="Lavender"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            
+            <!--template for button due to overriding default hover style-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+            <!--mouse hover-->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#EEDCFF"/>
+                </Trigger>
+            </Style.Triggers>
+            
+            <!--round border-->
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Style.Resources>
+            
+        </Style>
+    </Window.Resources>
+
     <Grid x:Name="grid">
+        <!--#region Row & Column defs-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--#endregion-->
+
+                                            <!-- Buttons -->
+        <!--upper left button-->
+        <Button x:Name="BurgerButton"
+                Grid.Row="0" Grid.Column="0"
+                Content="☰"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Height="40" Width="40"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Margin="0,0,0,0"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Click="BurgerButton_Click"/>
+
+        <!--display-->
+        <TextBox IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                 Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Right"
+                 x:Name="display" VerticalAlignment="Bottom"
+                 FontSize="30"
+                 Margin="10,10,10,10"
+                 FlowDirection="LeftToRight"
+                 MaxLength="17"
+                 TextChanged="Display_TextChanged"/>
+        
+        <!--waiting for operation display-->
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="5"
+                   Margin="10,60,10,50"
+                   Foreground="DimGray"
+                   FontSize="25"
+                   x:Name="waitingDisplay"
+                   Background="Transparent"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"/>
+
+        <!--first row-->
+        <Button Grid.Row="1">CE</Button>
+        <Button Grid.Row="1" Grid.Column="1">C</Button>
+        <Button Grid.Row="1" Grid.Column="2" Content="&lt;"></Button>
+        <Button Grid.Row="1" Grid.Column="3" Content="÷"></Button>
+        
+        <!--second row-->
+        <Button Grid.Row="2"
+                Click="One_Click">1</Button>
+        <Button Grid.Row="2" Grid.Column="1"
+                Click="Two_Click">2</Button>
+        <Button Grid.Row="2" Grid.Column="2">3</Button>
+        <Button Grid.Row="2" Grid.Column="3">×</Button>
+        
+        <!--third row-->
+        <Button Grid.Row="3">4</Button>
+        <Button Grid.Row="3" Grid.Column="1">5</Button>
+        <Button Grid.Row="3" Grid.Column="2">6</Button>
+        <Button Grid.Row="3" Grid.Column="3">-</Button>
+        
+        <!--fourth row-->
+        <Button Grid.Row="4">7</Button>
+        <Button Grid.Row="4" Grid.Column="1">8</Button>
+        <Button Grid.Row="4" Grid.Column="2">9</Button>
+        <Button Grid.Row="4" Grid.Column="3"
+                Click="Plus_Click">+</Button>
+        
+        <!--fifth row-->
+        <Button Grid.Row="5">00</Button>
+        <Button Grid.Row="5" Grid.Column="1">0</Button>
+        <Button Grid.Row="5" Grid.Column="2">.</Button>
+        <Button Grid.Row="5" Grid.Column="3">=</Button>
         
     </Grid>
 </Window>
