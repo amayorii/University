@@ -55,30 +55,33 @@ namespace Calculator
             BurgerButton.Click += BurgerButton_Click;
         }
 
-        //private void One_Click(object sender, RoutedEventArgs e)
-        //{
-        //    display.Text += "1";
-        //}
-        //private void Two_Click(object sender, RoutedEventArgs e)
-        //{
-        //    display.Text += "2";
-        //}
-        //private void Plus_Click(object sender, RoutedEventArgs e)
-        //{
-        //    display.Text += "+";
-        //}
+        private void One_Click(object sender, RoutedEventArgs e)
+        {
+            display.Text += "1";
+        }
+        private void Two_Click(object sender, RoutedEventArgs e)
+        {
+            display.Text += "2";
+        }
+        private void Plus_Click(object sender, RoutedEventArgs e)
+        {
+            display.Text += "+";
+        }
+        private void Backspace_Click(object sender, RoutedEventArgs e)
+        {
+            display.Text = display.Text.Remove(display.Text.Length - 1);
+        }
+        private void Display_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textbox = (TextBox)sender;
 
-        //private void Display_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    var textbox = (TextBox)sender;
-
-        //    // text limit for 17 chars
-        //    if (textbox.Text.Length > 17)
-        //    {
-        //        textbox.Text = textbox.Text[..17];
-        //        textbox.CaretIndex = textbox.Text.Length;
-        //        return;
-        //    }
-        //}
+            // text limit for 17 chars
+            if (textbox.Text.Length > 17)
+            {
+                textbox.Text = textbox.Text[..17];
+                textbox.CaretIndex = textbox.Text.Length;
+                return;
+            }
+        }
     }
 }
