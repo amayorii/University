@@ -5,6 +5,7 @@ namespace Calculator
 {
     class Calculator : INotifyPropertyChanged
     {
+        #region props
         private string text = "";
         private string waitingText = "";
 
@@ -34,6 +35,9 @@ namespace Calculator
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        #endregion
+
+        // helping methods
         private bool IsEmptyText() => string.IsNullOrEmpty(Text);
         private bool IsEmptyWaitingText() => string.IsNullOrEmpty(WaitingText);
         private double ConvertPIorExp() => Text == "π" ? Math.PI : Text == "e" ? Math.E : Convert.ToDouble(Text);
@@ -51,14 +55,14 @@ namespace Calculator
 
         public void PressNumKey(string content)
         {
-            if (Text == "π" || Text == "e") return;
+            if (Text == "π" || Text == "e") return; // if already PI or Exp
 
-            if (content == "π" || content == "e") Text = content;
-            else Text += content;
+            if (content == "π" || content == "e") Text = content; // if not but want to be
+            else Text += content; // thanks god nothing happened
         }
         public void PressComma()
         {
-            if (IsEmptyText() || Text[^1] == ',' || Text[^1] == '-' || Text.Contains(',') || Text == "π" || Text == "e") return;
+            if (IsEmptyText() || Text[^1] == ',' || Text[^1] == '-' || Text.Contains(',') || Text == "π" || Text == "e") return; // dangerous cases for comma
             else Text += ",";
         }
         public void PressBackspace()
@@ -71,14 +75,14 @@ namespace Calculator
         {
             content = content == "xⁿ" ? "^" : content;
 
-            if (!IsEmptyWaitingText() && !IsEmptyText() && WaitingText[^1] != '=' && Text != "-") PressEquals();
+            if (!IsEmptyWaitingText() && !IsEmptyText() && WaitingText[^1] != '=' && Text != "-") PressEquals(); // if already has operation and second number
 
-            if (IsEmptyText() && content == "-")
+            if (IsEmptyText() && content == "-") // if dont have any number and its minus
             {
                 Text += "-";
                 return;
             }
-            else if (!IsEmptyText() && Text != "-")
+            else if (!IsEmptyText() && Text != "-") // if not empty and isn't only minus
             {
                 WaitingText = Text + content;
                 Text = "";
@@ -87,10 +91,10 @@ namespace Calculator
         }
         public void PressEquals()
         {
-            if (IsEmptyWaitingText() || IsEmptyText() || WaitingText[^1] == '=' || Text == "-") return;
+            if (IsEmptyWaitingText() || IsEmptyText() || WaitingText[^1] == '=' || Text == "-") return; // dangerous cases for calculating
 
-            double num1 = WaitingText[..^1] == "π" ? Math.PI : WaitingText[..^1] == "e" ? Math.E : Convert.ToDouble(WaitingText[..^1]);
-            double num2 = ConvertPIorExp();
+            double num1 = WaitingText[..^1] == "π" ? Math.PI : WaitingText[..^1] == "e" ? Math.E : Convert.ToDouble(WaitingText[..^1]); // if PI or Exp in waiting text
+            double num2 = ConvertPIorExp(); // in just text
 
             double result = 0;
 
@@ -117,7 +121,7 @@ namespace Calculator
                     result = Math.Pow(num1, num2);
                     break;
                 default:
-                    MessageBox.Show("Invalid operation", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid operation", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); // i hope it will be never invoked
                     break;
             }
 
@@ -125,8 +129,8 @@ namespace Calculator
 
             string resultStr = result.ToString();
 
-            if (resultStr.Length >= 20) Text = result.ToString("e2");
-            else if (resultStr.Contains(',')) Text = result.ToString("F6");
+            if (resultStr.Length >= 20) Text = result.ToString("e2"); // if number is too big
+            else if (resultStr.Contains(',')) Text = result.ToString("F6"); // if number is float
             else Text = resultStr;
         }
         public void PressLn()
