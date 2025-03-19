@@ -1,6 +1,6 @@
 ﻿namespace Calculator.Commands
 {
-    class SqrtCommand
+    class SqrtCommand : ICommand
     {
         private Calculator calculator;
         string prevNum = "";

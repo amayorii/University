@@ -1,6 +1,6 @@
 ﻿namespace Calculator.Commands
 {
-    class LnCommand
+    class LnCommand : ICommand
     {
         private Calculator calculator;
         string prevNum = "";

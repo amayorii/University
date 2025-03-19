@@ -1,6 +1,6 @@
 ﻿namespace Calculator.Commands
 {
-    class ClearCommand
+    class ClearCommand : ICommand
     {
         private Calculator calculator;
         string prevText = "";

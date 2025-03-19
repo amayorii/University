@@ -1,6 +1,6 @@
 ﻿namespace Calculator.Commands
 {
-    class EqualsCommand
+    class EqualsCommand : ICommand
     {
         private Calculator calculator;
         private string prevNumber = "";

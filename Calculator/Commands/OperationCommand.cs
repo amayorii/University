@@ -1,6 +1,6 @@
 ﻿namespace Calculator.Commands
 {
-    class OperationCommand
+    class OperationCommand : ICommand
     {
         private Calculator calculator;
         string content = "";
@@ -17,8 +17,11 @@
 
         public void Unexecute()
         {
-            calculator.Text = calculator.WaitingText[..^1];
-            calculator.WaitingText = "";
+            if (!string.IsNullOrEmpty(calculator.WaitingText))
+            {
+                calculator.Text = calculator.WaitingText[..^1];
+                calculator.WaitingText = "";
+            }
         }
     }
 }
