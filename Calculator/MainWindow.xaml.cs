@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Calculator.Commands;
 
 namespace Calculator
 {
@@ -9,14 +10,28 @@ namespace Calculator
 
     public partial class MainWindow : Window
     {
-        Button PI = new Button() { Content = "π" };
-        Button exp = new Button() { Content = "e" };
-        Button sqrt = new Button() { Content = "√" };
-        Button power = new Button() { Content = "xⁿ" };
-        Button ln = new Button() { Content = "ln" };
+        readonly Button PI = new Button() { Content = "π", Visibility = Visibility.Collapsed };
+        readonly Button exp = new Button() { Content = "e", Visibility = Visibility.Collapsed };
+        readonly Button sqrt = new Button() { Content = "√", Visibility = Visibility.Collapsed };
+        readonly Button power = new Button() { Content = "xⁿ", Visibility = Visibility.Collapsed };
+        readonly Button ln = new Button() { Content = "ln", Visibility = Visibility.Collapsed };
+
+        readonly static Calculator calculator = new Calculator();
+        readonly ControlPanel controlPanel = new ControlPanel();
+
+        readonly EqualsCommand equalsCommand = new EqualsCommand(calculator);
+        readonly LnCommand lnCommand = new LnCommand(calculator);
+        readonly SqrtCommand sqrtCommand = new SqrtCommand(calculator);
+        readonly ClearCommand clearCommand = new ClearCommand(calculator);
+        readonly CommaCommand commaCommand = new CommaCommand(calculator);
+        readonly BackspaceCommand backspaceCommand = new BackspaceCommand(calculator);
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = calculator;
+
+            #region adding btns at specific pos and clicks
             Grid.SetColumn(PI, 5);
             Grid.SetRow(PI, 1);
             Grid.SetColumn(exp, 5);
@@ -27,61 +42,92 @@ namespace Calculator
             Grid.SetRow(power, 4);
             Grid.SetColumn(ln, 5);
             Grid.SetRow(ln, 5);
-        }
 
-        private void BurgerButton_Click(object sender, RoutedEventArgs e)
-        {
-            grid.ColumnDefinitions.ElementAt(4).Width = new GridLength(1, GridUnitType.Star);
-            BurgerButton.Content = "<";
-            BurgerButton.Click += Return;
-            BurgerButton.Click -= BurgerButton_Click;
             grid.Children.Add(PI);
             grid.Children.Add(exp);
             grid.Children.Add(sqrt);
             grid.Children.Add(power);
             grid.Children.Add(ln);
+
+            sqrt.Click += Sqrt_Click;
+            power.Click += Operation_Click;
+            ln.Click += Ln_Click;
+            PI.Click += Numpad_Click;
+            exp.Click += Numpad_Click;
+            #endregion
         }
 
-        private void Return(object sender, RoutedEventArgs e)
+        private void BurgerButton_Click(object sender, RoutedEventArgs e)
         {
-            grid.ColumnDefinitions.ElementAt(4).Width = GridLength.Auto;
-            grid.Children.Remove(PI);
-            grid.Children.Remove(exp);
-            grid.Children.Remove(sqrt);
-            grid.Children.Remove(power);
-            grid.Children.Remove(ln);
-            BurgerButton.Content = "☰";
-            BurgerButton.Click -= Return;
-            BurgerButton.Click += BurgerButton_Click;
+            Visibility visibility = default;
+
+            if (grid.ColumnDefinitions.ElementAt(4).Width == GridLength.Auto)
+            {
+                grid.ColumnDefinitions.ElementAt(4).Width = new GridLength(1, GridUnitType.Star);
+                BurgerButton.Content = "<";
+                visibility = Visibility.Visible;
+            }
+            else
+            {
+                grid.ColumnDefinitions.ElementAt(4).Width = GridLength.Auto;
+                BurgerButton.Content = "☰";
+                visibility = Visibility.Collapsed;
+            }
+
+            PI.Visibility = visibility;
+            exp.Visibility = visibility;
+            sqrt.Visibility = visibility;
+            power.Visibility = visibility;
+            ln.Visibility = visibility;
         }
 
-        private void One_Click(object sender, RoutedEventArgs e)
+        private void Numpad_Click(object sender, RoutedEventArgs e)
         {
-            display.Text += "1";
+            controlPanel.SetCommand(new NumKeyCommand(calculator, (sender as Button)!.Content.ToString()!));
+            controlPanel.RunCommand();
         }
-        private void Two_Click(object sender, RoutedEventArgs e)
+        private void Comma_Click(object sender, RoutedEventArgs e)
         {
-            display.Text += "2";
-        }
-        private void Plus_Click(object sender, RoutedEventArgs e)
-        {
-            display.Text += "+";
+            controlPanel.SetCommand(commaCommand);
+            controlPanel.RunCommand();
         }
         private void Backspace_Click(object sender, RoutedEventArgs e)
         {
-            display.Text = display.Text.Remove(display.Text.Length - 1);
+            controlPanel.SetCommand(backspaceCommand);
+            controlPanel.RunCommand();
         }
-        private void Display_TextChanged(object sender, TextChangedEventArgs e)
+        private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            var textbox = (TextBox)sender;
-
-            // text limit for 17 chars
-            if (textbox.Text.Length > 17)
-            {
-                textbox.Text = textbox.Text[..17];
-                textbox.CaretIndex = textbox.Text.Length;
-                return;
-            }
+            controlPanel.SetCommand(clearCommand);
+            controlPanel.RunCommand();
+        }
+        private void Operation_Click(object sender, RoutedEventArgs e)
+        {
+            controlPanel.SetCommand(new OperationCommand(calculator, (sender as Button)!.Content.ToString()!));
+            controlPanel.RunCommand();
+        }
+        private void Equals_Click(object sender, RoutedEventArgs e)
+        {
+            controlPanel.SetCommand(equalsCommand);
+            controlPanel.RunCommand();
+        }
+        private void Sqrt_Click(object sender, RoutedEventArgs e)
+        {
+            controlPanel.SetCommand(sqrtCommand);
+            controlPanel.RunCommand();
+        }
+        private void Ln_Click(object sender, RoutedEventArgs e)
+        {
+            controlPanel.SetCommand(lnCommand);
+            controlPanel.RunCommand();
+        }
+        private void Undo(object sender, RoutedEventArgs e)
+        {
+            controlPanel.Undo();
+        }
+        private void Redo(object sender, RoutedEventArgs e)
+        {
+            controlPanel.Redo();
         }
     }
 }
