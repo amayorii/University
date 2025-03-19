@@ -34,27 +34,51 @@ namespace Calculator
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        private bool IsEmptyText() => string.IsNullOrEmpty(Text);
+        private bool IsEmptyWaitingText() => string.IsNullOrEmpty(WaitingText);
+        private double ConvertPIorExp() => Text == "π" ? Math.PI : Text == "e" ? Math.E : Convert.ToDouble(Text);
+        private bool ThereAreErrors(string whatIsThis)
+        {
+            if (IsEmptyText() || Text == "-") return true;
 
-        public void PressNumKey(string content) => Text += content;
+            if (ConvertPIorExp() < 0)
+            {
+                MessageBox.Show($"{whatIsThis} of negative number is undefined", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+            return false;
+        }
+
+        public void PressNumKey(string content)
+        {
+            if (Text == "π" || Text == "e") return;
+
+            if (content == "π" || content == "e") Text = content;
+            else Text += content;
+        }
         public void PressComma()
         {
-            if (string.IsNullOrEmpty(Text) || Text[^1] == ',' || Text[^1] == '-' || Text.Contains(',')) return;
+            if (IsEmptyText() || Text[^1] == ',' || Text[^1] == '-' || Text.Contains(',') || Text == "π" || Text == "e") return;
             else Text += ",";
         }
-        public void PressBackspace() => Text = Text[..^1];
+        public void PressBackspace()
+        {
+            if (!string.IsNullOrEmpty(Text))
+                Text = Text[..^1];
+        }
         public void PressClear() => Text = "";
         public void PressOperation(string content)
         {
             content = content == "xⁿ" ? "^" : content;
 
-            if (!string.IsNullOrEmpty(WaitingText) && !string.IsNullOrEmpty(Text) && WaitingText[^1] != '=' && Text != "-") PressEquals();
+            if (!IsEmptyWaitingText() && !IsEmptyText() && WaitingText[^1] != '=' && Text != "-") PressEquals();
 
-            if (string.IsNullOrEmpty(Text) && content == "-")
+            if (IsEmptyText() && content == "-")
             {
                 Text += "-";
                 return;
             }
-            else if (!string.IsNullOrEmpty(Text) && Text != "-")
+            else if (!IsEmptyText() && Text != "-")
             {
                 WaitingText = Text + content;
                 Text = "";
@@ -63,10 +87,10 @@ namespace Calculator
         }
         public void PressEquals()
         {
-            if (string.IsNullOrEmpty(WaitingText) || string.IsNullOrEmpty(Text) || WaitingText[^1] == '=' || Text == "-") return;
+            if (IsEmptyWaitingText() || IsEmptyText() || WaitingText[^1] == '=' || Text == "-") return;
 
-            double num1 = Convert.ToDouble(WaitingText[..^1]);
-            double num2 = Convert.ToDouble(Text);
+            double num1 = WaitingText[..^1] == "π" ? Math.PI : WaitingText[..^1] == "e" ? Math.E : Convert.ToDouble(WaitingText[..^1]);
+            double num2 = ConvertPIorExp();
 
             double result = 0;
 
@@ -93,28 +117,33 @@ namespace Calculator
                     result = Math.Pow(num1, num2);
                     break;
                 default:
-                    MessageBox.Show("Invalid operation");
+                    MessageBox.Show("Invalid operation", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
 
             WaitingText += Text + "=";
 
-            if (result.ToString().Length >= 20)
-                Text = result.ToString("e2");
-            else if (result.ToString().Contains(','))
-                Text = result.ToString("F3");
-            else
-                Text = result.ToString();
+            string resultStr = result.ToString();
+
+            if (resultStr.Length >= 20) Text = result.ToString("e2");
+            else if (resultStr.Contains(',')) Text = result.ToString("F6");
+            else Text = resultStr;
         }
         public void PressLn()
         {
-            WaitingText = $"ln({Text})=";
-            Text = Math.Log10(Convert.ToDouble(Text)).ToString();
+            if (!ThereAreErrors("logarithm"))
+            {
+                WaitingText = $"ln({Text})=";
+                Text = Math.Log10(ConvertPIorExp()).ToString();
+            }
         }
         public void PressSqrt()
         {
-            WaitingText = $"√{Text}=";
-            Text = Math.Sqrt(Convert.ToDouble(Text)).ToString();
+            if (!ThereAreErrors("square root"))
+            {
+                WaitingText = $"√{Text}=";
+                Text = Math.Sqrt(ConvertPIorExp()).ToString();
+            }
         }
     }
 }
