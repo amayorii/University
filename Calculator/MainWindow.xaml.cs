@@ -138,6 +138,10 @@ namespace Calculator
             {
                 Undo(null!, null!);
             }
+            else if (Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.Y)
+            {
+                Redo(null!, null!);
+            }
             else if (Keyboard.IsKeyDown(Key.LeftShift) && e.Key == Key.D6)
             {
                 controlPanel.SetCommand(new OperationCommand(calculator, "xⁿ"));

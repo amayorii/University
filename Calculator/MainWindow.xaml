@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="520" Width="360"
-        Background="GhostWhite">
+        Title="Calculator" Height="520" Width="360"
+        Background="GhostWhite" MinWidth="360" MinHeight="520"
+        Icon="/calculator.jpg">
     
     <!-- 
     Do GUI:
@@ -21,10 +22,11 @@
     display - stopped | maybe upgrade
     left upper button - stopped | maybe upgrade
     -->
-    
+
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontSize" Value="27"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Margin" Value="5,5,5,5"/>
             <Setter Property="BorderBrush" Value="#B57EDC"/>
@@ -58,7 +60,7 @@
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Style.Resources>
-            
+
         </Style>
     </Window.Resources>
 
@@ -82,13 +84,25 @@
         <!--#endregion-->
 
                                             <!-- Buttons -->
+        <!--undo button-->
+        <Button Grid.Row="0" Grid.Column="3" 
+                Grid.ColumnSpan="2"
+                Height="35" Width="35"
+                BorderBrush="Transparent" 
+                Background="Transparent"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Margin="0,2,2,0"
+                Click="Redo"
+                Content="↪"/>
         <!--upper left button-->
         <Button x:Name="BurgerButton"
                 Grid.Row="0" Grid.Column="0"
                 Content="☰"
+                FontSize="35"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
-                Height="40" Width="40"
+                Height="45" Width="45"
                 Background="Transparent"
                 BorderBrush="Transparent"
                 Margin="0,0,0,0"
