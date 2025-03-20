@@ -16,6 +16,7 @@ namespace Calculator
             {
                 text = value;
                 if (text.Length > 17) text = text[..17];
+                text = text.StartsWith("00") ? "0" : text.StartsWith("-00") ? "-0" : text; // prevent two or more zeros
                 OnPropertyChanged("Text");
             }
         }
