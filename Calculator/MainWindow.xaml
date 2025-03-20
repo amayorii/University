@@ -31,7 +31,7 @@
             <Setter Property="Background" Value="Lavender"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            
+            <Setter Property="Focusable" Value="False"/>
             <!--template for button due to overriding default hover style-->
             <Setter Property="Template">
                 <Setter.Value>

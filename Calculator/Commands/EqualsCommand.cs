@@ -10,7 +10,8 @@
         }
         public void Execute()
         {
-            prevNumber = calculator.WaitingText[..^1];
+            if (calculator.WaitingText.Length != 0)
+                prevNumber = calculator.WaitingText[..^1];
             calculator.PressEquals();
         }
 

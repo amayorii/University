@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Calculator.Commands;
 
 namespace Calculator
@@ -30,6 +31,7 @@ namespace Calculator
         {
             InitializeComponent();
             DataContext = calculator;
+            KeyDown += Window_KeyDown;
 
             #region adding btns at specific pos and clicks
             Grid.SetColumn(PI, 5);
@@ -59,7 +61,7 @@ namespace Calculator
 
         private void BurgerButton_Click(object sender, RoutedEventArgs e)
         {
-            Visibility visibility = default;
+            Visibility visibility;
 
             if (grid.ColumnDefinitions.ElementAt(4).Width == GridLength.Auto)
             {
@@ -128,6 +130,105 @@ namespace Calculator
         private void Redo(object sender, RoutedEventArgs e)
         {
             controlPanel.Redo();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && e.Key == Key.Z)
+            {
+                Undo(null!, null!);
+            }
+            else if (Keyboard.IsKeyDown(Key.LeftShift) && e.Key == Key.D6)
+            {
+                controlPanel.SetCommand(new OperationCommand(calculator, "xⁿ"));
+                controlPanel.RunCommand();
+            }
+            else if (Keyboard.IsKeyDown(Key.LeftShift) && e.Key == Key.D8)
+            {
+                controlPanel.SetCommand(new OperationCommand(calculator, "×"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.OemPlus)
+            {
+                controlPanel.SetCommand(new OperationCommand(calculator, "+"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.OemMinus)
+            {
+                controlPanel.SetCommand(new OperationCommand(calculator, "-"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.OemQuestion)
+            {
+                controlPanel.SetCommand(new OperationCommand(calculator, "÷"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.Delete)
+            {
+                Clear_Click(null!, null!);
+            }
+            else if (e.Key == Key.Back)
+            {
+                Backspace_Click(null!, null!);
+            }
+            else if (e.Key == Key.OemComma)
+            {
+                Comma_Click(null!, null!);
+            }
+            else if (e.Key == Key.Enter)
+            {
+                Equals_Click(null!, null!);
+            }
+            else if (e.Key == Key.D1)
+            {
+                controlPanel.SetCommand(new NumKeyCommand(calculator, "1"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.D2)
+            {
+                controlPanel.SetCommand(new NumKeyCommand(calculator, "2"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.D3)
+            {
+                controlPanel.SetCommand(new NumKeyCommand(calculator, "3"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.D4)
+            {
+                controlPanel.SetCommand(new NumKeyCommand(calculator, "4"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.D5)
+            {
+                controlPanel.SetCommand(new NumKeyCommand(calculator, "5"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.D6)
+            {
+                controlPanel.SetCommand(new NumKeyCommand(calculator, "6"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.D7)
+            {
+                controlPanel.SetCommand(new NumKeyCommand(calculator, "7"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.D8)
+            {
+                controlPanel.SetCommand(new NumKeyCommand(calculator, "8"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.D9)
+            {
+                controlPanel.SetCommand(new NumKeyCommand(calculator, "9"));
+                controlPanel.RunCommand();
+            }
+            else if (e.Key == Key.D0)
+            {
+                controlPanel.SetCommand(new NumKeyCommand(calculator, "0"));
+                controlPanel.RunCommand();
+            }
         }
     }
 }
