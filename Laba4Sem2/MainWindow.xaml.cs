@@ -1,4 +1,9 @@
-﻿using System.Windows;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Windows;
+using Laba4Sem2.DTOs;
+using Laba4Sem2.Model;
+using Mapster;
 
 namespace Laba4Sem2;
 
@@ -19,6 +24,13 @@ public partial class MainWindow : Window
         room.AddAnimal(accUnit);
         room.AddAnimal(accUnit1);
         MessageBox.Show(room.ToShortString());
-
+        RoomDTO roomJSON = room.Adapt<RoomDTO>();
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Converters = { new JsonStringEnumConverter() }
+        };
+        string json = JsonSerializer.Serialize(roomJSON, options);
+        MessageBox.Show(json);
     }
 }
