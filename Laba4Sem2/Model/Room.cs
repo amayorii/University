@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Laba4Sem2.Model
 {
-    class Room
+    public class Room
     {
         private RoomType roomType;
         private int roomId, size, cleaningCost;

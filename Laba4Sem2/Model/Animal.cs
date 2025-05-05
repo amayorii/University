@@ -1,6 +1,6 @@
 ﻿namespace Laba4Sem2.Model
 {
-    class Animal
+    public class Animal
     {
         private string animalName;
         private string country;

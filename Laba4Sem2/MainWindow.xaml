@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laba4Sem2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Animal Shelter" Height="450" Width="800">
     <Grid>
-
+        <ListBox x:Name="listOfRooms" ItemsSource="{Binding Rooms}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding RoomType}" Margin="0,0,10,0"/>
+                        <TextBlock Text="{Binding Animals.Count}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

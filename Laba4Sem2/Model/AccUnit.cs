@@ -2,7 +2,7 @@
 
 namespace Laba4Sem2.Model
 {
-    class AccUnit
+    public class AccUnit
     {
         private Animal animal;
         private DateTime dateOfArrival;
