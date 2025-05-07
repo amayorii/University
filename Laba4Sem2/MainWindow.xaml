@@ -5,17 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laba4Sem2"
         mc:Ignorable="d"
-        Title="Animal Shelter" Height="450" Width="800">
+        Title="Animal Shelter" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen" MinHeight="400" MinWidth="800">
+    
+    <Window.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        <ListBox x:Name="listOfRooms" ItemsSource="{Binding Rooms}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding RoomType}" Margin="0,0,10,0"/>
-                        <TextBlock Text="{Binding Animals.Count}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
+        
+        <ListView ItemsSource="{Binding Rooms}" FontSize="15"
+                  VirtualizingPanel.ScrollUnit="Pixel"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            
+            <!--making listview look like grid with headers-->
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding RoomId}" Width="50"/>
+                    <GridViewColumn Header="Room type" DisplayMemberBinding="{Binding RoomType}" Width="100"/>
+                    <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}" Width="75"/>
+                    <GridViewColumn Header="Cleaning cost" DisplayMemberBinding="{Binding CleaningCost}" Width="125"/>
+                    <GridViewColumn Header="Animals list">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Animals}">
+                                    
+                                    <!--making animals wrap-->
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel>
+                                            </WrapPanel>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    
+                                    <!--binding text to corresponding value-->
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding ., StringFormat='{}{0}'}"
+                                                       Margin="0,0,20,0"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    
+                                </ItemsControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            
+        </ListView>
+
     </Grid>
 </Window>

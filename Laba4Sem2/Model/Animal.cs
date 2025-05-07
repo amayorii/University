@@ -22,7 +22,7 @@
 
         public override string ToString()
         {
-            return $"Animal type: {AnimalName}\nCountry: {Country}\nName: {OwnName}\nBorn: {Born}";
+            return $"Animal type: {AnimalName}\nName: {OwnName}\nCountry: {Country}\nBorn: {Born}";
         }
     }
 }
