@@ -20,6 +20,7 @@ namespace Laba4Sem2.Model
 
         public RoomType RoomType { get => roomType; private set => roomType = value; }
         public List<AccUnit> Animals { get => animals; private set => animals = value; }
+        public string ShortString => ToShortString();
 
         public Room(RoomType roomType, int roomId, int size, int cleaningCost)
         {
@@ -60,7 +61,7 @@ namespace Laba4Sem2.Model
             {
                 sum += accUnit.MaintenanceCost;
             }
-            return $"Room id: {RoomId}\nMaintenance cost for room: {sum}";
+            return $"Amount of animals: {Animals.Count}\nMaintenance cost for room: {sum}";
         }
 
     }

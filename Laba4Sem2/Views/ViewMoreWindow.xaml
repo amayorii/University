@@ -1,0 +1,28 @@
+﻿<Window x:Class="Laba4Sem2.Views.ViewMoreWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Laba4Sem2.Views"
+        mc:Ignorable="d"
+        Title="Animals list" Height="500" Width="550"
+        MinHeight="300" MinWidth="400">
+    <Window.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <ListView ItemsSource="{Binding Room.Animals}"
+                  VirtualizingPanel.ScrollUnit="Pixel"
+                  HorizontalContentAlignment="Center">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Animal description" Width="200" DisplayMemberBinding="{Binding Animal}"/>
+                    <GridViewColumn Header="Date of arrival" Width="200" DisplayMemberBinding="{Binding DateOfArrival}"/>
+                    <GridViewColumn Header="Maintenance cost" Width="125" DisplayMemberBinding="{Binding MaintenanceCost}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

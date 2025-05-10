@@ -1,5 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Laba4Sem2.Model;
+using Laba4Sem2.Views;
 
 namespace Laba4Sem2;
 
@@ -71,5 +73,14 @@ public partial class MainWindow : Window
         Rooms.Add(room2);
         Rooms.Add(room3);
         Rooms.Add(room4);
+    }
+    private void ShowAnimalsList_Click(object sender, RoutedEventArgs e)
+    {
+        ViewMoreWindow viewMoreWindow = new ViewMoreWindow((sender as Button)?.CommandParameter as Room)
+        {
+            Owner = this,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+        };
+        viewMoreWindow.ShowDialog();
     }
 }
