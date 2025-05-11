@@ -1,0 +1,87 @@
+﻿<Window x:Class="Laba4Sem2.Views.AddAnimalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Laba4Sem2.Views"
+        mc:Ignorable="d"
+        Title="New animal" Height="450" Width="250">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- row1 -->
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+            <TextBlock Text="Animal name"
+                       FontSize="20"
+                       Margin="0,0,0,5"/>
+
+            <TextBox Grid.Row="0"
+                     x:Name="animalName"
+                     Width="200" Height="25"
+                     FontSize="15"
+                     HorizontalContentAlignment="Stretch"
+                     VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <!-- row2 -->
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Grid.Row="1">
+            
+            <TextBlock Text="Country"
+                       FontSize="20"
+                       Margin="0,0,0,5"/>
+
+            <ComboBox Width="200" Height="25" x:Name="CountryBox"
+                      FontSize="15"/>
+        </StackPanel>
+        
+        <!-- row3 -->
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Grid.Row="2">
+
+            <TextBlock Text="Own name"
+                       FontSize="20"
+                       Margin="0,0,0,5"/>
+
+            <TextBox Grid.Row="0"
+                     x:Name="ownName"
+                     Width="200" Height="25"
+                     FontSize="15"
+                     HorizontalContentAlignment="Stretch"
+                     VerticalContentAlignment="Center"/>
+        </StackPanel>
+        
+        <!-- row4 -->
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Grid.Row="3">
+
+            <TextBlock Text="Born date"
+                       FontSize="20"
+                       Margin="0,0,0,5"/>
+
+            <DatePicker Width="200" Text="Select"
+                        x:Name="bornDate"
+                        VerticalContentAlignment="Center"
+                        FontSize="15"/>
+        </StackPanel>
+        
+        <!-- row5 -->
+        <Button Grid.Row="4" HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20" Padding="10"
+                Content="Submit"
+                Cursor="Hand"
+                Click="Submit"></Button>
+    </Grid>
+</Window>

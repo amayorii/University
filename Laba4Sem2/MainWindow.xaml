@@ -11,6 +11,7 @@
     <Window.Resources>
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Cursor" Value="Hand"/>
         </Style>
     </Window.Resources>
 
@@ -23,7 +24,9 @@
         <ListView x:Name="table"
                   ItemsSource="{Binding Rooms}" FontSize="15"
                   VirtualizingPanel.ScrollUnit="Pixel"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  SelectionMode="Single"
+                  SelectionChanged="table_SelectionChanged">
 
             <!--making listview look like grid with headers-->
             <ListView.View>
@@ -36,48 +39,37 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    
                                     <!-- show short desc -->
                                     <TextBlock Text="{Binding ShortString}" 
                                                TextWrapping="Wrap" 
                                                VerticalAlignment="Center"/>
-                                    
-                                    <!-- more details btn -->
-                                    <Button Content="View more..."
-                                            Click="ShowAnimalsList_Click"
-                                            Cursor="Hand"
-                                            CommandParameter="{Binding}"
-                                            Padding="10"
-                                            Margin="150,0,0,0" />
-                                    
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
-
         </ListView>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal"
-                    HorizontalAlignment="Right"
-                    Margin="10">
-            <!-- edit animal -->
-            <Button Content="Edit"
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10"
+                    HorizontalAlignment="Right">
+            <!-- more details btn -->
+            <Button Content="View details"
+                    x:Name="viewMoreBtn"
+                    IsEnabled="False"
+                    FontSize="20"
+                    Click="ShowAnimalsList_Click"
                     Cursor="Hand"
-                    FontSize="25"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Width="130" Height="50"
-                    Margin="0,0,20,0"/>
-            <!-- add animal -->
-            <Button Content="New..."
+                    CommandParameter="{Binding ElementName=table, Path=SelectedItem}"
+                    Padding="10"
+                    Margin="0,0,10,0"/>
+            
+            <Button Content="New room"
+                    FontSize="20"
                     Cursor="Hand"
-                    FontSize="25"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Width="130" Height="50"
-                    Margin="20,0,0,0"/>
+                    Padding="10"
+                    Margin="10,0,0,0"/>
         </StackPanel>
+        
     </Grid>
 </Window>

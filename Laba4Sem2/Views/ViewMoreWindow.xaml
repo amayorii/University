@@ -4,25 +4,54 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laba4Sem2.Views"
+        xmlns:converters="clr-namespace:Laba4Sem2.Converters"
         mc:Ignorable="d"
-        Title="Animals list" Height="500" Width="550"
-        MinHeight="300" MinWidth="400">
+        Title="Animals list" Height="500" Width="600"
+        MinHeight="300" MinWidth="400" FontSize="15">
     <Window.Resources>
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
         </Style>
+        <converters:TimeConverterUTC x:Key="DateTimeConverter"/>
     </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
         <ListView ItemsSource="{Binding Room.Animals}"
                   VirtualizingPanel.ScrollUnit="Pixel"
-                  HorizontalContentAlignment="Center">
+                  HorizontalContentAlignment="Center" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Animal description" Width="200" DisplayMemberBinding="{Binding Animal}"/>
-                    <GridViewColumn Header="Date of arrival" Width="200" DisplayMemberBinding="{Binding DateOfArrival}"/>
+                    <GridViewColumn Header="Date of arrival" Width="200" DisplayMemberBinding="{Binding DateOfArrival, Converter={StaticResource DateTimeConverter}}"/>
                     <GridViewColumn Header="Maintenance cost" Width="125" DisplayMemberBinding="{Binding MaintenanceCost}"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <StackPanel Grid.Row="1" Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="10">
+            <!-- edit animal -->
+            <Button Content="Edit"
+                    Cursor="Hand"
+                    FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Width="130" Height="50"
+                    Margin="0,0,20,0"/>
+            <!-- add animal -->
+            <Button Content="New..."
+                    Click="NewAnimal_Click"
+                    Cursor="Hand"
+                    FontSize="25"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Width="130" Height="50"
+                    Margin="20,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>

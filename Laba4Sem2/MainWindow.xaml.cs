@@ -39,6 +39,9 @@ public partial class MainWindow : Window
         room.AddAnimal(accUnit2);
         room.AddAnimal(accUnit3);
         room.AddAnimal(accUnit4);
+        room.AddAnimal(accUnit4);
+        room.AddAnimal(accUnit4);
+        room.AddAnimal(accUnit4);
         room1.AddAnimal(accUnit);
         room1.AddAnimal(accUnit1);
         room1.AddAnimal(accUnit2);
@@ -82,5 +85,10 @@ public partial class MainWindow : Window
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
         };
         viewMoreWindow.ShowDialog();
+    }
+
+    private void table_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        viewMoreBtn.IsEnabled = table.SelectedItem != null;
     }
 }

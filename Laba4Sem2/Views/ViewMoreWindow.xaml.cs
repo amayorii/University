@@ -16,5 +16,14 @@ namespace Laba4Sem2.Views
             Room = room;
             DataContext = this;
         }
+        private void NewAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            AddAnimalWindow aAW = new AddAnimalWindow(Room)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            };
+            aAW.ShowDialog();
+        }
     }
 }
