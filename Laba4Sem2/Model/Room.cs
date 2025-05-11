@@ -1,13 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Laba4Sem2.Model
 {
-    public class Room
+    public class Room : INotifyPropertyChanged
     {
         private RoomType roomType;
         private int roomId, size, cleaningCost;
         private List<AccUnit> animals = [];
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         [Range(0, int.MaxValue)]
         public int RoomId { get => roomId; set => roomId = value; }
@@ -19,7 +22,20 @@ namespace Laba4Sem2.Model
         public int CleaningCost { get => cleaningCost; set => cleaningCost = value; }
 
         public RoomType RoomType { get => roomType; private set => roomType = value; }
-        public List<AccUnit> Animals { get => animals; private set => animals = value; }
+        public List<AccUnit> Animals
+        {
+            get => animals;
+            private set
+            {
+                animals = value;
+                OnPropertyChanged(nameof(Animals));
+            }
+        }
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ShortString"));
+        }
         public string ShortString => ToShortString();
 
         public Room(RoomType roomType, int roomId, int size, int cleaningCost)
@@ -41,8 +57,10 @@ namespace Laba4Sem2.Model
 
         public void AddAnimal(AccUnit accUnit)
         {
-            Animals.Add(accUnit);
+            var newList = new List<AccUnit>(Animals) { accUnit };
+            Animals = newList;
         }
+
 
         public override string ToString()
         {
