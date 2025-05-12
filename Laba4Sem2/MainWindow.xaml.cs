@@ -61,7 +61,6 @@ public partial class MainWindow : Window
         room4.AddAnimal(accUnit1);
         room4.AddAnimal(accUnit2);
         room4.AddAnimal(accUnit3);
-        //MessageBox.Show(room.ToShortString());
         //RoomDTO roomJSON = room.Adapt<RoomDTO>();
         //var options = new JsonSerializerOptions
         //{
@@ -78,7 +77,7 @@ public partial class MainWindow : Window
     }
     private void ShowAnimalsList_Click(object sender, RoutedEventArgs e)
     {
-        DetailsWindow viewMoreWindow = new DetailsWindow((sender as Button)?.CommandParameter as Room)
+        DetailsWindow viewMoreWindow = new DetailsWindow(table.SelectedItem as Room)
         {
             Owner = this,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,

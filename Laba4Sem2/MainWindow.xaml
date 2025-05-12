@@ -12,6 +12,7 @@
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="Cursor" Value="Hand"/>
+            <EventSetter Event="MouseDoubleClick" Handler="ShowAnimalsList_Click"/>
         </Style>
     </Window.Resources>
 
@@ -60,7 +61,6 @@
                     FontSize="20"
                     Click="ShowAnimalsList_Click"
                     Cursor="Hand"
-                    CommandParameter="{Binding ElementName=table, Path=SelectedItem}"
                     Padding="10"
                     Margin="0,0,10,0"/>
             

@@ -12,7 +12,6 @@ namespace Laba4Sem2.Model
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        [Range(0, int.MaxValue)]
         public int RoomId
         {
             get => roomId;
