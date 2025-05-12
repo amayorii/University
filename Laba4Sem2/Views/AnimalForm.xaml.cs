@@ -36,7 +36,6 @@ namespace Laba4Sem2.Views
             else
             {
                 DateTime dateOfArrival = room.Animals[selectedIndex].DateOfArrival;
-                room.Animals[selectedIndex].Animal.AnimalName = _animalName;
                 room.UpdateAnimal(selectedIndex, new AccUnit(new Animal(_animalName, _country, _ownName, _bornDate), dateOfArrival, maintCost));
             }
             this.Close();
