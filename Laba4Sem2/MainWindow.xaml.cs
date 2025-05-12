@@ -10,10 +10,9 @@ namespace Laba4Sem2;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly List<Room> rooms = [];
+    private static readonly List<Room> rooms = [];
 
-    public List<Room> Rooms => rooms;
-
+    public static List<Room> Rooms => rooms;
     public MainWindow()
     {
         InitializeComponent();
@@ -31,9 +30,9 @@ public partial class MainWindow : Window
 
         Room room = new Room(RoomType.Cage, 1, 20, 120);
         Room room1 = new Room(RoomType.Aquarium, 2, 50, 110);
-        Room room2 = new Room(RoomType.Aquarium, 2, 50, 110);
-        Room room3 = new Room(RoomType.Aquarium, 2, 50, 110);
-        Room room4 = new Room(RoomType.Aquarium, 2, 50, 110);
+        Room room2 = new Room(RoomType.Aquarium, 3, 50, 110);
+        Room room3 = new Room(RoomType.Aquarium, 4, 50, 110);
+        Room room4 = new Room(RoomType.Aquarium, 5, 50, 110);
         room.AddAnimal(accUnit);
         room.AddAnimal(accUnit1);
         room.AddAnimal(accUnit2);
@@ -87,5 +86,33 @@ public partial class MainWindow : Window
         viewMoreWindow.ShowDialog();
     }
 
-    private void Table_SelectionChanged(object sender, SelectionChangedEventArgs e) => viewMoreBtn.IsEnabled = table.SelectedItem != null;
+    private void Table_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        viewMoreBtn.IsEnabled = table.SelectedItem != null;
+        editBtn.IsEnabled = table.SelectedItem != null;
+    }
+
+    private void NewRoom_Click(object sender, RoutedEventArgs e)
+    {
+        RoomForm newRoom = new RoomForm()
+        {
+            Owner = this,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+        };
+        newRoom.ShowDialog();
+        table.Items.Refresh();
+    }
+    private void EditRoom_Click(object sender, RoutedEventArgs e)
+    {
+        var selectedRoom = table.SelectedItem as Room;
+        RoomForm newRoom = new RoomForm(selectedRoom.RoomId - 1)
+        {
+            Owner = this,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+        };
+        newRoom.roomType.Text = selectedRoom.RoomType.ToString();
+        newRoom.roomSize.Text = selectedRoom.Size.ToString();
+        newRoom.cleaningCost.Text = selectedRoom.CleaningCost.ToString();
+        newRoom.ShowDialog();
+    }
 }

@@ -64,7 +64,17 @@
                     Padding="10"
                     Margin="0,0,10,0"/>
             
+            <Button Content="Edit room"
+                    x:Name="editBtn"
+                    IsEnabled="False"
+                    Click="EditRoom_Click"
+                    FontSize="20"
+                    Cursor="Hand"
+                    Padding="10"
+                    Margin="10,0,10,0"/>
+            
             <Button Content="New room"
+                    Click="NewRoom_Click"
                     FontSize="20"
                     Cursor="Hand"
                     Padding="10"
