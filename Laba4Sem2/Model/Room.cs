@@ -13,15 +13,47 @@ namespace Laba4Sem2.Model
         public event PropertyChangedEventHandler? PropertyChanged;
 
         [Range(0, int.MaxValue)]
-        public int RoomId { get => roomId; set => roomId = value; }
+        public int RoomId
+        {
+            get => roomId;
+            set
+            {
+                roomId = value;
+                OnPropertyChanged(nameof(RoomId));
+            }
+        }
 
         [Range(2, int.MaxValue)]
-        public int Size { get => size; set => size = value; }
+        public int Size
+        {
+            get => size;
+            set
+            {
+                size = value;
+                OnPropertyChanged(nameof(Size));
+            }
+        }
 
         [Range(0, int.MaxValue)]
-        public int CleaningCost { get => cleaningCost; set => cleaningCost = value; }
+        public int CleaningCost
+        {
+            get => cleaningCost;
+            set
+            {
+                cleaningCost = value;
+                OnPropertyChanged(nameof(CleaningCost));
+            }
+        }
 
-        public RoomType RoomType { get => roomType; private set => roomType = value; }
+        public RoomType RoomType
+        {
+            get => roomType;
+            set
+            {
+                roomType = value;
+                OnPropertyChanged(nameof(RoomType));
+            }
+        }
 
         public string ShortString => ToShortString();
 
