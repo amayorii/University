@@ -22,6 +22,9 @@ namespace Laba4Sem2.Model
         public int CleaningCost { get => cleaningCost; set => cleaningCost = value; }
 
         public RoomType RoomType { get => roomType; private set => roomType = value; }
+
+        public string ShortString => ToShortString();
+
         public List<AccUnit> Animals
         {
             get => animals;
@@ -34,9 +37,8 @@ namespace Laba4Sem2.Model
         protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ShortString"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShortString)));
         }
-        public string ShortString => ToShortString();
 
         public Room(RoomType roomType, int roomId, int size, int cleaningCost)
         {
@@ -61,6 +63,11 @@ namespace Laba4Sem2.Model
             Animals = newList;
         }
 
+        public void UpdateAnimal(int index, AccUnit updatedAccUnit)
+        {
+            animals[index] = updatedAccUnit;
+            OnPropertyChanged(nameof(Animals));
+        }
 
         public override string ToString()
         {

@@ -79,7 +79,7 @@ public partial class MainWindow : Window
     }
     private void ShowAnimalsList_Click(object sender, RoutedEventArgs e)
     {
-        ViewMoreWindow viewMoreWindow = new ViewMoreWindow((sender as Button)?.CommandParameter as Room)
+        DetailsWindow viewMoreWindow = new DetailsWindow((sender as Button)?.CommandParameter as Room)
         {
             Owner = this,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
@@ -87,8 +87,5 @@ public partial class MainWindow : Window
         viewMoreWindow.ShowDialog();
     }
 
-    private void table_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        viewMoreBtn.IsEnabled = table.SelectedItem != null;
-    }
+    private void Table_SelectionChanged(object sender, SelectionChangedEventArgs e) => viewMoreBtn.IsEnabled = table.SelectedItem != null;
 }

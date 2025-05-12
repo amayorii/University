@@ -1,6 +1,8 @@
-﻿namespace Laba4Sem2.Model
+﻿using System.ComponentModel;
+
+namespace Laba4Sem2.Model
 {
-    public class Animal
+    public class Animal : INotifyPropertyChanged
     {
         private string animalName;
         private string country;
@@ -15,10 +17,49 @@
             this.Born = born;
         }
 
-        public string AnimalName { get => animalName; set => animalName = value; }
-        public string Country { get => country; set => country = value; }
-        public string OwnName { get => ownName; set => ownName = value; }
-        public DateTime Born { get => born; set => born = value; }
+        public string AnimalName
+        {
+            get => animalName;
+            set
+            {
+                animalName = value;
+                OnPropertyChanged(nameof(AnimalName));
+            }
+        }
+        public string Country
+        {
+            get => country;
+            set
+            {
+                country = value;
+                OnPropertyChanged(nameof(Country));
+            }
+        }
+        public string OwnName
+        {
+            get => ownName;
+            set
+            {
+                ownName = value;
+                OnPropertyChanged(nameof(OwnName));
+            }
+        }
+        public DateTime Born
+        {
+            get => born;
+            set
+            {
+                born = value;
+                OnPropertyChanged(nameof(Born));
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ToString)));
+        }
 
         public override string ToString()
         {
