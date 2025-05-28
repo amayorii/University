@@ -36,7 +36,7 @@
                     <GridViewColumn Header="Room type" DisplayMemberBinding="{Binding RoomType}" Width="100"/>
                     <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}" Width="75"/>
                     <GridViewColumn Header="Cleaning cost" DisplayMemberBinding="{Binding CleaningCost}" Width="125"/>
-                    <GridViewColumn Header="Animals list" Width="Auto">
+                    <GridViewColumn Header="Animals list" Width="350">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

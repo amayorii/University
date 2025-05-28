@@ -9,6 +9,13 @@ namespace Laba4Sem2.Model
         private string ownName;
         private DateTime born;
 
+        public Animal()
+        {
+            this.AnimalName = "Dog";
+            this.Country = "Kaniv";
+            this.OwnName = "Maksim";
+            this.Born = new DateTime(2001, 09, 11);
+        }
         public Animal(string animalName, string country, string ownName, DateTime born)
         {
             this.AnimalName = animalName;

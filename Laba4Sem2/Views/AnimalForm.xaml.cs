@@ -22,7 +22,8 @@ namespace Laba4Sem2.Views
 
         private void Submit(object sender, RoutedEventArgs e)
         {
-            int maintCost = Convert.ToInt32(maintenanceCost.Text);
+            SaveAndClose sac = new SaveAndClose();
+            int _maintCost = Convert.ToInt32(maintenanceCost.Text);
             string _animalName = animalName.Text;
             string _country = country.Text;
             string _ownName = ownName.Text;
@@ -31,12 +32,18 @@ namespace Laba4Sem2.Views
             if (selectedIndex == -1)
             {
                 Animal animal = new Animal(_animalName, _country, _ownName, _bornDate);
-                room.AddAnimal(new AccUnit(animal, DateTime.Now, maintCost));
+                AccUnit accU = new AccUnit(animal, DateTime.Now, _maintCost);
+
+                room.AddAnimal(accU);
+                if (sac.ShowDialog() == false) room.RemoveAnimal(accU);
             }
             else
             {
+                AccUnit prevAnimal = room.Animals[selectedIndex];
                 DateTime dateOfArrival = room.Animals[selectedIndex].DateOfArrival;
-                room.UpdateAnimal(selectedIndex, new AccUnit(new Animal(_animalName, _country, _ownName, _bornDate), dateOfArrival, maintCost));
+
+                room.UpdateAnimal(selectedIndex, new AccUnit(new Animal(_animalName, _country, _ownName, _bornDate), dateOfArrival, _maintCost));
+                if (sac.ShowDialog() == false) room.UpdateAnimal(selectedIndex, prevAnimal);
             }
             this.Close();
         }

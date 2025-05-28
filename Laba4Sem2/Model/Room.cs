@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Laba4Sem2.Model
 {
@@ -56,6 +57,7 @@ namespace Laba4Sem2.Model
 
         public string ShortString => ToShortString();
 
+        [JsonInclude]
         public List<AccUnit> Animals
         {
             get => animals;
@@ -70,7 +72,13 @@ namespace Laba4Sem2.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShortString)));
         }
-
+        public Room()
+        {
+            RoomType = RoomType.Cage;
+            RoomId = 0;
+            Size = 20;
+            CleaningCost = 10;
+        }
         public Room(RoomType roomType, int roomId, int size, int cleaningCost)
         {
             RoomType = roomType;
@@ -93,7 +101,12 @@ namespace Laba4Sem2.Model
             var newList = new List<AccUnit>(Animals) { accUnit };
             Animals = newList;
         }
-
+        public void RemoveAnimal(AccUnit accUnit)
+        {
+            var newList = new List<AccUnit>(Animals);
+            newList.Remove(accUnit);
+            Animals = newList;
+        }
         public void UpdateAnimal(int index, AccUnit updatedAccUnit)
         {
             animals[index] = updatedAccUnit;
