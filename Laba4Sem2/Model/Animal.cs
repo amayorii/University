@@ -81,8 +81,15 @@ namespace Laba4Sem2.Model
             get => born;
             set
             {
-                born = value;
-                OnPropertyChanged(nameof(Born));
+                if (string.IsNullOrEmpty(value.ToString()))
+                {
+                    throw new Exception("You need to choose a date");
+                }
+                else
+                {
+                    born = value;
+                    OnPropertyChanged(nameof(Born));
+                }
             }
         }
 

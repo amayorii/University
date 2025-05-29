@@ -68,8 +68,15 @@ namespace Laba4Sem2.Model
             get => roomType;
             set
             {
-                roomType = value;
-                OnPropertyChanged(nameof(RoomType));
+                if (string.IsNullOrEmpty(value.ToString()))
+                {
+                    throw new Exception("You need to choose room type!");
+                }
+                else
+                {
+                    roomType = value;
+                    OnPropertyChanged(nameof(RoomType));
+                }
             }
         }
 
