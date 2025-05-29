@@ -24,8 +24,15 @@ namespace Laba4Sem2.Model
             get => maintenanceCost;
             set
             {
-                maintenanceCost = value;
-                OnPropertyChanged(nameof(MaintenanceCost));
+                if (value < 0)
+                {
+                    throw new Exception("maintenance cost must be greater than zero.");
+                }
+                else
+                {
+                    maintenanceCost = value;
+                    OnPropertyChanged(nameof(MaintenanceCost));
+                }
             }
         }
         public DateTime DateOfArrival

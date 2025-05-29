@@ -29,8 +29,19 @@ namespace Laba4Sem2.Model
             get => animalName;
             set
             {
-                animalName = value;
-                OnPropertyChanged(nameof(AnimalName));
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Animal must have a name!");
+                }
+                else if (!value.Any(x => char.IsLetterOrDigit(x)))
+                {
+                    throw new Exception("Animal name must contain only letters or digits");
+                }
+                else
+                {
+                    animalName = value;
+                    OnPropertyChanged(nameof(AnimalName));
+                }
             }
         }
         public string Country
@@ -38,8 +49,15 @@ namespace Laba4Sem2.Model
             get => country;
             set
             {
-                country = value;
-                OnPropertyChanged(nameof(Country));
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Country cannot be empty.");
+                }
+                else
+                {
+                    country = value;
+                    OnPropertyChanged(nameof(Country));
+                }
             }
         }
         public string OwnName
@@ -47,8 +65,15 @@ namespace Laba4Sem2.Model
             get => ownName;
             set
             {
-                ownName = value;
-                OnPropertyChanged(nameof(OwnName));
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Own name cannot be empty.");
+                }
+                else
+                {
+                    ownName = value;
+                    OnPropertyChanged(nameof(OwnName));
+                }
             }
         }
         public DateTime Born

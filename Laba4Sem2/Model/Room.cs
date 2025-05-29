@@ -18,30 +18,48 @@ namespace Laba4Sem2.Model
             get => roomId;
             set
             {
-                roomId = value;
-                OnPropertyChanged(nameof(RoomId));
+                if (value < 0)
+                {
+                    throw new Exception("what?");
+                }
+                else
+                {
+                    roomId = value;
+                    OnPropertyChanged(nameof(RoomId));
+                }
             }
         }
 
-        [Range(2, int.MaxValue)]
+        [Range(2, int.MaxValue, ErrorMessage = "Room size must be at least 2x2 m.")]
         public int Size
         {
             get => size;
             set
             {
-                size = value;
-                OnPropertyChanged(nameof(Size));
+                if (value < 2)
+                {
+                    throw new Exception("Room size must be at least 2x2 m.");
+                }
+                else
+                {
+                    size = value;
+                    OnPropertyChanged(nameof(Size));
+                }
             }
         }
 
-        [Range(0, int.MaxValue)]
+        [Range(0, int.MaxValue, ErrorMessage = "Cleaning cost cannot be negative.")]
         public int CleaningCost
         {
             get => cleaningCost;
             set
             {
-                cleaningCost = value;
-                OnPropertyChanged(nameof(CleaningCost));
+                if (value < 0) throw new Exception("Cleaning cost cannot be negative.");
+                else
+                {
+                    cleaningCost = value;
+                    OnPropertyChanged(nameof(CleaningCost));
+                }
             }
         }
 

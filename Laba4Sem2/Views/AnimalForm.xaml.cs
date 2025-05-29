@@ -22,6 +22,7 @@ namespace Laba4Sem2.Views
 
         private void Submit(object sender, RoutedEventArgs e)
         {
+            bool exception = false;
             SaveAndClose sac = new SaveAndClose();
             int _maintCost = Convert.ToInt32(maintenanceCost.Text);
             string _animalName = animalName.Text;
@@ -31,21 +32,37 @@ namespace Laba4Sem2.Views
 
             if (selectedIndex == -1)
             {
-                Animal animal = new Animal(_animalName, _country, _ownName, _bornDate);
-                AccUnit accU = new AccUnit(animal, DateTime.Now, _maintCost);
+                try
+                {
+                    Animal animal = new Animal(_animalName, _country, _ownName, _bornDate);
+                    AccUnit accU = new AccUnit(animal, DateTime.Now, _maintCost);
 
-                room.AddAnimal(accU);
-                if (sac.ShowDialog() == false) room.RemoveAnimal(accU);
+                    room.AddAnimal(accU);
+                    if (sac.ShowDialog() == false) room.RemoveAnimal(accU);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    exception = true;
+                }
             }
             else
             {
                 AccUnit prevAnimal = room.Animals[selectedIndex];
                 DateTime dateOfArrival = room.Animals[selectedIndex].DateOfArrival;
-
-                room.UpdateAnimal(selectedIndex, new AccUnit(new Animal(_animalName, _country, _ownName, _bornDate), dateOfArrival, _maintCost));
-                if (sac.ShowDialog() == false) room.UpdateAnimal(selectedIndex, prevAnimal);
+                try
+                {
+                    room.UpdateAnimal(selectedIndex, new AccUnit(new Animal(_animalName, _country, _ownName, _bornDate), dateOfArrival, _maintCost));
+                    if (sac.ShowDialog() == false) room.UpdateAnimal(selectedIndex, prevAnimal);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    exception = true;
+                }
             }
-            this.Close();
+            if (!exception)
+                this.Close();
         }
     }
 }
